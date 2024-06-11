@@ -4,7 +4,7 @@ services:
     alias: docker
 
 
-.stages:
+stages:
   - build
   - Test acceptation
   - Release image
@@ -23,23 +23,23 @@ services:
     - apk --no-cache add curl
     - curl "https://$DOMAIN" | grep "Hello world!"  
 
-.docker-build:
+docker-build:
   # Use the official docker image.
   stage: build
   script:
-    - docker build -t  alpinehelloworld .
-    - docker save alpinehelloworld > alpinehelloworld.tar
+    - docker build -t  mini_projet_gitlab .
+    - docker save mini_projet_gitlab > mini_projet_gitlab.tar
   artifacts:
     paths:
-      - alpinehelloworld.tar    
+      - mini_projet_gitlab.tar    
 
 
 .test acceptation:
   # Official docker image.
   stage: Test acceptation
   script:
-    - docker load < alpinehelloworld.tar
-    - docker run -d -p 80:5000 -e PORT=5000 --name webapp alpinehelloworld
+    - docker load < mini_projet_gitlab.tar
+    - docker run -d -p 80:5000 -e PORT=5000 --name webapp mini_projet_gitlab
     - sleep 5
     - apk --no-cache add curl
     - curl "http://docker" | grep  "Hello world"
@@ -47,9 +47,9 @@ services:
 .release image:
   stage: Release image
   script:
-    - docker load < alpinehelloworld.tar
-    - docker tag alpinehelloworld "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
-    - docker tag alpinehelloworld "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
+    - docker load < mini_projet_gitlab.tar
+    - docker tag mini_projet_gitlab "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
+    - docker tag mini_projet_gitlab "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker push "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
     - docker push "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
