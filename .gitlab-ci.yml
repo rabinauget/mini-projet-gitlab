@@ -3,15 +3,14 @@ services:
   - name: docker:dind
     alias: docker
 
-
 stages:
   - build
   - Test acceptation
   - Release image
+  - Deploy staging
+  - Test staging
   - Deploy review
   - Stop review
-  - Deploy staging
-  - Test staging  
   - Deploy prod
   - Test prod
 
@@ -24,7 +23,7 @@ stages:
     - curl "https://$DOMAIN" | grep "Hello world!"  
 
 docker-build:
-  # Use the official docker image.
+  # Use the official docker image
   stage: build
   script:
     - docker build -t  mini_projet_gitlab .
@@ -33,9 +32,8 @@ docker-build:
     paths:
       - mini_projet_gitlab.tar    
 
-
 .test acceptation:
-  # Official docker image.
+  # Official docker image
   stage: Test acceptation
   script:
     - docker load < mini_projet_gitlab.tar
@@ -84,7 +82,6 @@ docker-build:
     - heroku container:push -a eazytraining-prod-auget web
     - heroku container:release -a eazytraining-prod-auget web    
 
-
 .deploy review:
   stage: Deploy review
   only:
@@ -129,7 +126,6 @@ docker-build:
   stage: Test staging
   variables:
     DOMAIN: eazytraining-staging-auget-d12bb760ad6a.herokuapp.com
-
 
 .test prod:
   <<: *test
