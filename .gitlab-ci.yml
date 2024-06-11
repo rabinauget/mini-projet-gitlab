@@ -4,7 +4,7 @@ services:
     alias: docker
 
 stages:
-  - build
+  - Build
   - Test acceptation
   - Release image
   - Deploy staging
@@ -24,7 +24,7 @@ stages:
 
 docker-build:
   # Use the official docker image
-  stage: build
+  stage: Build
   script:
     - docker build -t  mini_projet_gitlab .
     - docker save mini_projet_gitlab > mini_projet_gitlab.tar
