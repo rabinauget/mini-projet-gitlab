@@ -14,7 +14,7 @@ Ce mini projet est dans le cadre du bootcamp Devops de Eazytraing
 
 **LinkedIn** : www.linkedin.com/in/auget-rabina-61663314a
 
-# contexte du projet
+# Contexte du projet
 
 Ce projet a pour objectif de mettre en place un pipeline CI/CD (Intégration Continue et Déploiement Continu) afin d'automatiser le processus de livraison et de déploiement d'une application. 
 
