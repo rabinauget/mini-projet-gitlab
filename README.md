@@ -30,9 +30,9 @@ Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
 3. **La phase de sauvegarde de l'image (Release image) :** Après avoir confirmer que l'artéfact est bien fonctionnel, nous allons le sauvegarder afin de pouvoir le déployer sur les serveurs tests/prod ou le réutiliser ultérieurement.
 
-4. **La phase de déploiement sur le serveur Test :** sera la partie où nous allons effectuer le déploiement sur le serveur test. Cela va permettre de tester l'application par exemple.
+4. **La phase de déploiement sur le serveur Test (Staging) :** sera la partie où nous allons effectuer le déploiement sur le serveur test. Cela va permettre de tester l'application par exemple.
 
-5. **La phase de révision :** L'application, après avoir été testée et validée, doit être déployée en production. Mais avant cela, elle passera par une phase de révision pour s'assurer qu'elle fonctionne correctement et sans erreurs.
+5. **La phase de révision (Deploy Review) :** L'application, après avoir été testée et validée, doit être déployée en production. Mais avant cela, elle passera par une phase de révision pour s'assurer qu'elle fonctionne correctement et sans erreurs.
 
 6. **La phase de déploimeent sur le serveur Prod :** L'application, ayant été confirmée comme fonctionnelle à toutes les étapes, peut maintenant être déployée sur l'environnement de production pour être utilisée par les clients.
 
@@ -57,8 +57,6 @@ Nous allons utiliser les technologies ci-dessous:
 
 Pour commencer, nous allons créer un projet/repository sur Gitlab avec le +:
 
-![alt text](image.png)
-
 Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On a le choix de choisir:
 
 + de créer un noveau projet vièrge
@@ -67,3 +65,7 @@ Nous allons maintenant être rediriger vers l'interface de création du nouveau 
 + soit de connecter gitlab à un repo externe
 
 Mais étant donné que j'ai déjà téléchargé le code source sur mon ordinateur local depuis GitHub car j'ai voulu organiser mes fichiers, je vais créer un nouveau projet vièrge.
+
+Il faut maintenant spécifier le nom du projet mettre le projet en public. Pour les autre options qui sont optionnel, je les laisse comme tels.
+
+
