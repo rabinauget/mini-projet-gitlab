@@ -1,93 +1,55 @@
-# mini-projet-gitlab
+# MINI PROJET GITLAB
 
+Ce mini projet est dans le cadre du bootcamp Devops de Eazytraing
 
+Nom : AUGET
 
-## Getting started
+Prénom : Rabina
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Pour la promotion 19 du Bootcamp DevOps
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Période : Mai - Juin - Juillet 2024
 
-## Add your files
+Date de réalisation: 15 Juin 2024
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+LinkedIn : www.linkedin.com/in/auget-rabina-61663314a
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/skynet17/mini-projet-gitlab.git
-git branch -M main
-git push -uf origin main
-```
+# CONTEXT DU PROJET
 
-## Integrate with your tools
+Ce projet a pour objectif de mettre en place un pipeline CI/CD (Intégration Continue et Déploiement Continu) afin d'automatiser le processus de livraison et de déploiement d'une application. 
 
-- [ ] [Set up project integrations](https://gitlab.com/skynet17/mini-projet-gitlab/-/settings/integrations)
+Le pipeline sera déclenché à chaque push de code dans le repo GitLab, garantissant ainsi, que les nouvelles modifications sont automatiquement construits (phase de build), testées, intégrées et déployées sur les serveurs de Test (Staging) et de Production.
 
-## Collaborate with your team
+# FONCTIONNEMENT DU PIPELINE
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
-## Test and Deploy
+1. La phase de Build: qui consistera à la compilation du code source et construction des artefacts nécessaires pour le déploiement.
 
-Use the built-in continuous integration in GitLab.
+2. La phase de Test de l'artifact (Test d'acceptance): qui sera la partie où nous allons tester et confirmer que l'artifact précédement créée est bien fonctionnel.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+3. La phase de sauvegarde de l'image (Release image) : Après avoir confirmer que l'artéfact est bien fonctionnel, nous allons le sauvegarder afin de pouvoir le déployer sur les serveurs tests/prod ou le réutiliser ultérieurement.
 
-***
+4. La phase de déploiement sur le serveur Test: ça sera la partie où nous allons effectuer le déploiement sur le serveur test. Cela va permettre de tester l'application par exemple.
 
-# Editing this README
+5. La phase de révision: Après que l'application a été testé et confirmer, il va falloir le pousser vers la prod; mais avant cela, on va faire passer l'application dans une phase de révision afin de confirmer que l'application est bien fonctionnelle et sans erreur.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+6. La phase de déploimeent sur le serveur Prod: L'application étant bien fonctionnelle confirmer par toutes ces étapes, elle peut maintenant être déployer sur l'environnement de prod afin que les clients puissent le consommer.
 
-## Suggestions for a good README
+# APPLICATION
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Donc le pipeline sera composé de:
 
-## Name
-Choose a self-explaining name for your project.
++ le dossier webapp: qui va contenir les fichiers du code source de l'application
++ le fichier .gitlab-ci.yml: où nous allons décrire toutes les étapes du pipeline CI/CD
++ le fichier Dockerfile: qui nous servira à créer l'image docker de notre application pour pouvoir le conteneuriser
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+# Infrastructure:
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Nous allons utiliser les technologies ci-dessous:
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
++ Physical host: Windows 11
++ Gitlab: nous allons utiliser le gitlab public accessible sur https://gitlab.com/
++ Et pour le runner, nous allons utiliser les runners de Gitlab car Gitlab fourni déjà toutes sortes de runners. Pour ce projet, nous allons utiliser Docker DinD (Docker in Docker)
++ Et pour déployer notre application, nous allons le déployer sur Heroku
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.

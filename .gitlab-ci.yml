@@ -20,7 +20,7 @@ stages:
     - master
   script:
     - apk --no-cache add curl
-    - curl "https://$DOMAIN" | grep "Hello world!"  
+    - curl "https://$DOMAIN" | grep "Hello world!"
 
 docker-build:
   # Use the official docker image
@@ -30,7 +30,7 @@ docker-build:
     - docker save mini_projet_gitlab > mini_projet_gitlab.tar
   artifacts:
     paths:
-      - mini_projet_gitlab.tar    
+      - mini_projet_gitlab.tar
 
 .test acceptation:
   # Official docker image
@@ -40,7 +40,7 @@ docker-build:
     - docker run -d --name webapp mini_projet_gitlab
     - sleep 5
     - apk --no-cache add curl
-    - curl "http://docker" | grep  "Hello world"
+    - curl "http://docker" | grep  "200"
 
 .release image:
   stage: Release image
@@ -80,7 +80,7 @@ docker-build:
     - heroku container:login
     - heroku create eazytraining-prod-auget  || echo "project already exist"
     - heroku container:push -a eazytraining-prod-auget web
-    - heroku container:release -a eazytraining-prod-auget web    
+    - heroku container:release -a eazytraining-prod-auget web
 
 .deploy review:
   stage: Deploy review
@@ -99,7 +99,7 @@ docker-build:
     - echo "REVIEW_ENVIRONMENT_URL=$REVIEW_ENVIRONMENT_URL" >> deploy.env
   artifacts:
     reports:
-      dotenv: deploy.env  
+      dotenv: deploy.env
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: $REVIEW_ENVIRONMENT_URL
