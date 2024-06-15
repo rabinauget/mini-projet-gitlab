@@ -72,7 +72,7 @@ Nous allons utiliser les technologies ci-dessous:
 
 6. Et sur notre ordinateur local, nous allons naviguer dans le répertoire où nous souhaitons mettre projet et une fois le projet cloner, on se déplace dans le dossier.
 
-7. Pour ma part, je copie maintenant le dossier `webapp` qui contient les fichiers du code source et je créé les fichiers `Dockerfile` et le fichier `.gitlab`.
+7. Pour ma part, je copie maintenant le dossier `webapp` qui contient les fichiers du code source et je créé les fichiers `Dockerfile` et le fichier `.gitlab-ci.yml`.
 
 8. Je pousse maintenant les fichiers sur mon repos comme ceci:
 
