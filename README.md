@@ -53,3 +53,17 @@ Nous allons utiliser les technologies ci-dessous:
 + **Runner :** Et pour le runner, nous allons utiliser les runners de Gitlab car Gitlab fourni déjà toutes sortes de runners. Pour ce projet, nous allons utiliser Docker DinD (Docker in Docker)
 + **Heroku :** Et pour déployer notre application, nous allons le déployer sur Heroku qui est une plateforme de déploiement d'application (https://www.heroku.com/)
 
+# PREPARATION DE L'ENVIRONNEMENT:
+
+Pour commencer, nous allons créer un projet/repository sur Gitlab avec le +:
+
+![alt text](image.png)
+
+Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On a le choix de choisir:
+
++ de créer un noveau projet vièrge
++ de créer à partir d'un template
++ d'importer un projet depuis un repo externe comme GitHub/Bitbucket ou autre
++ soit de connecter gitlab à un repo externe
+
+Mais étant donné que j'ai déjà téléchargé le code source sur mon ordinateur local depuis GitHub car j'ai voulu organiser mes fichiers, je vais créer un nouveau projet vièrge.
