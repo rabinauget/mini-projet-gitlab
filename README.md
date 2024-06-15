@@ -82,4 +82,22 @@ Nous allons utiliser les technologies ci-dessous:
 
 # Phase de build: 
 
-Après avoir créé le fichier `Dockerfile` et le fichier `.gitlab-ci.yml`. 
+1. Après avoir fait un push de notre nos fichiers, on peut remarquer cet icône qui nous indique qu'un pipeline est en cours d'execution.
+
+2. On va aller dans la bare latérale gauche sur `Build` > `Pipeline`. C'est là que nous pourrions voir la liste de tous les pipelines d'un projet. Et on peut voir que le pipeline de build s'est lancé automatiquement après le push de notre code. Mais comme notre fichier `.gitlab-ci.yml`ne contient pour l'instant que la partie `build`, il n'y pour l'instant qu'un seul job sur la partie `Stages`
+
+3. On peut cliquer sur le statu du job pour voir exactement la partie du stage qui est en cours d'execution qui est le `Build`
+
+4. On peut maintenant cliquer sur `docker-build`pour voir la console du job qui nous montre tous les étapes du build: Depuis la génération du container Dind jusqu'au status finale du Job qui est ici `succeeded`qui nous indique le job s'est terminé sans erreur.
+
+5. Sur GitLab, chaque job crée un conteneur qui est supprimé une fois le job terminé. C'est pourquoi, dans notre fichier de pipeline `.gitlab-ci.yml`, nous sauvegardons l'image Docker en tant qu'artifact pour qu'elle soit disponible pour les jobs suivants. On peut vérifier que l'artifact a bien été sauvegardé dans `Build` > `Artifact` et la référence du commit de l'artfifact correspond bien à la référence du commit de notre pipeline `2ef8da8b`
+
+6. Si on regarder le contenu de l'artifact, il contient 3 fichiers 
+   + `artifacts.zip` : qui contient l'image docker .tar
+   + `metadata.gz` : les metadonnés de l'artifact: nom de l'image, le droit du système sur le fichier, le crc pour la sécurité du fichier, la taille de l'image
+   + `job.log`: les logs du pipeline que nous avons vu sur la partie 4.
+
+Donc maintenant, nous pouvons passer à la phase de test d'acceptation.
+
+# Phase d'acceptant : 
+
