@@ -82,3 +82,4 @@ Nous allons utiliser les technologies ci-dessous:
 
 # Phase de build: 
 
+Après avoir créé le fichier `Dockerfile` et le fichier `.gitlab-ci.yml`. 
