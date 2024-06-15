@@ -40,9 +40,9 @@ Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
 Donc le pipeline sera composé de:
 
-+ **Le dossier webapp :** va contenir les fichiers du code source de l'application
-+ **Le fichier .gitlab-ci.yml :** où nous allons décrire toutes les étapes du pipeline CI/CD
-+ **Le fichier Dockerfile :** nous servira à créer l'image docker de notre application pour pouvoir le conteneuriser
++ **Le dossier webapp :** va contenir les fichiers du code source de l'application.
++ **Le fichier .gitlab-ci.yml :** où nous allons décrire toutes les étapes du pipeline CI/CD.
++ **Le fichier Dockerfile :** nous servira à créer l'image docker de notre application pour pouvoir le conteneuriser.
 
 # Infrastructure:
 
