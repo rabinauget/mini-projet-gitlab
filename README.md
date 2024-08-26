@@ -75,7 +75,8 @@ Nous allons utiliser les technologies ci-dessous:
 
 7. Et sur mon ordinateur local, je vais naviguer vers le répertoire où j'ai mis le project. 
 
-    + Ensuite, j'ajoute le repo gitlab que je viens de créer comme repo distant et son nom d'identification sera `origin` : `git remote add origin https://gitlab.com/skynet17/mini-projet-gitlab.git`
+    + Ensuite, j'ajoute le repo gitlab que je viens de créer comme repo distant et son nom d'identification sera `origin` : 
+    `git remote add origin https://gitlab.com/skynet17/mini-projet-gitlab.git`
     + Puis, je renomme la branche par défaut où je me trouve actuellement en `main`: `git branch -M main`
     + Enfin, je vais pouvoir pousser les fichiers du code sources vers le repo distant `origin` et sous la branche `main`: `git push -uf origin main`
 
