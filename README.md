@@ -75,10 +75,12 @@ Nous allons utiliser les technologies ci-dessous:
 
 7. Et sur mon ordinateur local, je vais naviguer vers le répertoire où j'ai mis le project. 
 
-    + Ensuite, j'ajoute le repo gitlab que je viens de créer comme repo distant et son nom d'identification sera `origin` : 
+    + Ensuite, ajouter le repo gitlab que je viens de créer comme repo distant et son nom d'identification sera `origin` : 
+    
     `git remote add origin https://gitlab.com/skynet17/mini-projet-gitlab.git`
-    + Puis, je renomme la branche par défaut où je me trouve actuellement en `main`: `git branch -M main`
-    + Enfin, je vais pouvoir pousser les fichiers du code sources vers le repo distant `origin` et sous la branche `main`: `git push -uf origin main`
+
+    + Puis, renommer la branche par défaut où je me trouve actuellement en `main`: `git branch -M main`
+    + Enfin, il est temps de pousser les fichiers du code sources vers le repo distant `origin` et sous la branche `main`: `git push -uf origin main`
 
 8. J'ai terminé de créer le fichier `Dockerfile` et `.gitlab-ci.yml` sur mon ordinateur local donc je vais maintenant pouvoir les pousser vers Gitlab sous la branche main comme suit:
 
