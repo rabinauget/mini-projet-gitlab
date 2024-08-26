@@ -57,7 +57,11 @@ Nous allons utiliser les technologies ci-dessous:
 
 1. Pour commencer, nous allons créer un projet/repository sur Gitlab avec le +:
 
+![alt text](<Capture d'écran 2024-08-26 224143.png>)
+
 2. Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On a le choix de choisir:
+
+![alt text](<new project.png>)
 
 + de créer un noveau projet vièrge
 + de créer à partir d'un template
@@ -66,7 +70,11 @@ Nous allons utiliser les technologies ci-dessous:
 
 3. Mais étant donné que j'ai déjà téléchargé le code source sur mon ordinateur local depuis GitHub car j'ai voulu organiser mes fichiers, je vais créer un nouveau projet vièrge.
 
+![alt text](<create project.png>)
+
 4. Il faut maintenant spécifier le nom du projet et mettre le projet en public. Pour les autre options qui sont optionnelles, je les laisse comme tels.
+
+![alt text](image.png)
 
 5. Nous allons copier le lien du repo via le `Clone with HTTPS`
 
@@ -82,7 +90,7 @@ Nous allons utiliser les technologies ci-dessous:
 
 # Phase de build: 
 
-1. Après avoir fait un push de notre nos fichiers, on peut remarquer cet icône qui nous indique qu'un pipeline est en cours d'execution.
+1. Après avoir fait un push de nos fichiers, on peut remarquer cet icône qui nous indique qu'un pipeline est en cours d'execution.
 
 2. On va aller dans la bare latérale gauche sur `Build` > `Pipeline`. C'est là que nous pourrions voir la liste de tous les pipelines d'un projet. Et on peut voir que le pipeline de build s'est lancé automatiquement après le push de notre code. Mais comme notre fichier `.gitlab-ci.yml`ne contient pour l'instant que la partie `build`, il n'y pour l'instant qu'un seul job sur la partie `Stages`
 
