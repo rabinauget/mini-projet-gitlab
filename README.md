@@ -53,7 +53,7 @@ Nous allons utiliser les technologies ci-dessous:
 + **Runner :** Et pour le runner, nous allons utiliser les runners de Gitlab car Gitlab fourni déjà toutes sortes de runners. Pour ce projet, nous allons utiliser Docker DinD (Docker in Docker)
 + **Heroku :** Et pour déployer notre application, nous allons le déployer sur Heroku qui est une plateforme de déploiement d'application (https://www.heroku.com/)
 
-# Préparation de l'environnement:
+# Préparation de l'environnement
 
 1. Pour commencer, nous allons créer un projet/repository sur Gitlab avec le +:
 
@@ -86,7 +86,7 @@ Nous allons utiliser les technologies ci-dessous:
     + `git commit -m "First commit"`
     + `git push origin main`
 
-# Phase de build: 
+# Phase de build
 
 1. Après avoir terminer le push des fichiers, on peut remarquer cet icône qui nous indique qu'un pipeline est en cours d'execution. Il s'est lancé automatiquement après l'action push. Mais on verra par la suite comment le déclencher après un évènement spécifique.
 
@@ -102,7 +102,11 @@ Nous allons utiliser les technologies ci-dessous:
 
 4. Sur GitLab, chaque job crée un conteneur qui est supprimé une fois le job terminé. C'est pourquoi, dans notre fichier de pipeline `.gitlab-ci.yml`, nous sauvegardons l'image Docker sous forme d'artifact pour qu'elle soit disponible pour les jobs suivants. On peut vérifier que l'artifact a bien été sauvegardé dans `Build` > `Artifact` et la référence du commit de l'artfifact correspond bien à la référence du commit de notre pipeline `2ef8da8b`. Ou bien depuis la liste des pipelines, on peut aussi cliquer sur l'icône de téléchargement pour voir la liste des artifacts construits et cliquer sur l'un d'eux pour directement le télécharger. Mais on peut également le télécharger depuis `Build` > `Artifact`.
 
+**Capture dans `Build` > `Artifact`**
+
 ![2-4-phase-build-artifact-list.png](../capture/2-4-phase-build-artifact-list.png)
+
+**Capture dans `Build` > `Pipeline`**
 
 ![2-4-phase-build-artifact-download.png](../capture/2-4-phase-build-artifact-download.png)
 
@@ -115,11 +119,15 @@ Nous allons utiliser les technologies ci-dessous:
 
 6. Mais si on clique sur l'icône du dossier de l'artefact dans `Build` > `Artifact`, on verra le nom de l'artefact que nous avons donné dans `.gitlab-ci.yml`.
 
+**Capture de l'icône du dossier**
+
 ![2-6-phase-build-artifact-directory.png](../capture/2-6-phase-build-artifact-directory.png)
+
+**Capture du nom de l'artefact**
 
 ![2-6-phase-build-artifact-name-gitlab-ci.png](../capture/2-6-phase-build-artifact-name-gitlab-ci.png)
 
 Donc maintenant, nous pouvons passer à la phase de test d'acceptation.
 
-# Phase d'acceptant : 
+# Phase d'acceptant
 
