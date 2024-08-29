@@ -111,7 +111,7 @@ Nous allons utiliser les technologies ci-dessous:
    + `metadata.gz` : les metadonnés de l'artifact: nom de l'image, le droit du système sur le fichier, le crc pour la sécurité du fichier, la taille de l'image
    + `job.log`: les logs du pipeline que nous avons vu sur la partie 4.
 
-![2-5-phase-build-artifact-content.png](../capture/2-4-phase-build-artifact-content.png)
+![2-5-phase-build-artifact-content.png](../capture/2-5-phase-build-artifact-content.png)
 
 6. Mais si on clique sur l'icône du dossier de l'artefact dans `Build` > `Artifact`, on verra le nom de l'artefact que nous avons donné dans `.gitlab-ci.yml`.
 
