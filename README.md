@@ -117,7 +117,7 @@ Nous allons utiliser les technologies ci-dessous:
 
 ![2-5-phase-build-artifact-content.png](../capture/2-5-phase-build-artifact-content.png)
 
-6. Mais si on clique sur l'icône du dossier de l'artefact dans `Build` > `Artifact`, on verra le nom de l'artefact que nous avons donné dans `.gitlab-ci.yml`.
+6. Mais si on clique sur l'icône du dossier de l'artefact dans `Build` > `Artifact`, on verra le nom de l'artefact que nous avons spécifié dans `.gitlab-ci.yml`.
 
 **Capture de l'icône du dossier**
 
