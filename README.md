@@ -36,7 +36,7 @@ Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
 6. **La phase de déploimeent sur le serveur Prod :** L'application, ayant été confirmée comme fonctionnelle à toutes les étapes, peut maintenant être déployée sur l'environnement de production pour être utilisée par les clients.
 
-# Application: 
+# Application
 
 Donc le pipeline sera composé de:
 
@@ -44,7 +44,7 @@ Donc le pipeline sera composé de:
 + **Le fichier .gitlab-ci.yml :** où nous allons décrire toutes les étapes du pipeline CI/CD.
 + **Le fichier Dockerfile :** nous servira à créer l'image docker de notre application pour pouvoir le conteneuriser.
 
-# Infrastructure:
+# Infrastructure
 
 Nous allons utiliser les technologies ci-dessous:
 
@@ -111,9 +111,9 @@ Nous allons utiliser les technologies ci-dessous:
 ![2-4-phase-build-artifact-download.png](../capture/2-4-phase-build-artifact-download.png)
 
 5. Si on regarder le contenu de l'artefact, il contient 3 fichiers 
-   + `artifacts.zip` : qui contient l'image docker .tar
-   + `metadata.gz` : les metadonnés de l'artifact: nom de l'image, le droit du système sur le fichier, le crc pour la sécurité du fichier, la taille de l'image
-   + `job.log`: les logs du pipeline que nous avons vu sur la partie 4.
+   + **`artifacts.zip` :** qui contient l'image docker .tar
+   + **`metadata.gz` :** les metadonnés de l'artifact: nom de l'image, le droit du système sur le fichier, le crc pour la sécurité du fichier, la taille de l'image
+   + **`job.log`:** les logs du pipeline que nous avons vu sur la partie 4.
 
 ![2-5-phase-build-artifact-content.png](../capture/2-5-phase-build-artifact-content.png)
 
