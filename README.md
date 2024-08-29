@@ -57,21 +57,21 @@ Nous allons utiliser les technologies ci-dessous:
 
 1. Pour commencer, nous allons créer un projet/repository sur Gitlab avec le +:
 
-..\capture\1-1-prep-env-plus.png
+![plus-for-create-project](..\capture\1-1-prep-env-plus.png)
 
 2. Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On aura plusieurs choix, mais étant donné que j'ai déjà téléchargé le code source sur mon ordinateur local depuis GitHub car j'ai voulu organiser mes fichiers, je vais créer un nouveau projet vièrge.
 
-..\capture\1-2-prep-env-create-project.png
+![create-project](..\capture\1-2-prep-env-create-project.png)
 
 3. Il faut maintenant spécifier le nom du projet et mettre le projet en public. Pour les autre options qui sont optionnelles, je vais les laisser comme tels et je clique sur `Create project`.
 
-..\capture\1-3-prep-env-create-project-form.png
+![create-project-form](..\capture\1-3-prep-env-create-project-form.png)
 
-6. Une fois le projet créée, nous allons copier le lien du repo via le bouton en bleu `Code` et choisir la méthode `Clone with HTTPS` en cliquant sur l'icône presse papier à côté de l'URL.
+4. Une fois le projet créée, nous allons copier le lien du repo via le bouton en bleu `Code` et choisir la méthode `Clone with HTTPS` en cliquant sur l'icône presse papier à côté de l'URL.
 
-..\capture\1-4-prep-env-clone-https.png
+![clone-https](..\capture\1-4-prep-env-clone-https.png)
 
-7. Et sur mon ordinateur local, je vais naviguer vers le répertoire où j'ai mis le project. 
+5. Et sur mon ordinateur local, je vais naviguer vers le répertoire où j'ai mis le project. 
 
     + Ensuite, ajouter le repo gitlab que je viens de créer comme repo distant et son nom d'identification sera `origin` : 
     
@@ -80,7 +80,7 @@ Nous allons utiliser les technologies ci-dessous:
     + Puis, renommer la branche par défaut où je me trouve actuellement en `main`: `git branch -M main`
     + Enfin, il est temps de pousser les fichiers du code sources vers le repo distant `origin` et sous la branche `main`: `git push -uf origin main`
 
-8. J'ai terminé de créer le fichier `Dockerfile` et `.gitlab-ci.yml` sur mon ordinateur local donc je vais maintenant pouvoir les pousser vers Gitlab sous la branche main comme suit:
+6. J'ai terminé de créer le fichier `Dockerfile` et `.gitlab-ci.yml` sur mon ordinateur local donc je vais maintenant pouvoir les pousser vers Gitlab sous la branche main comme suit:
 
     + `git add .`
     + `git commit -m "First commit"`
@@ -89,6 +89,8 @@ Nous allons utiliser les technologies ci-dessous:
 # Phase de build: 
 
 1. Après avoir terminer le push des fichiers, on peut remarquer cet icône qui nous indique qu'un pipeline est en cours d'execution.
+
+![pipeline-running](..\capture\2-1-phase-build-pipeline-running.png)
 
 2. On va aller dans la barre latérale gauche sur `Build` > `Pipeline`. C'est là que nous pourrions voir la liste de tous les pipelines d'un projet. Et on peut voir que le pipeline de build s'est lancé automatiquement après le push de notre code. Mais comme notre fichier `.gitlab-ci.yml`ne contient pour l'instant que la partie `build`, il n'y pour l'instant qu'un seul job sur la partie `Stages`
 
