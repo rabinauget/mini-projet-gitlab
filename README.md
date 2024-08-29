@@ -57,21 +57,19 @@ Nous allons utiliser les technologies ci-dessous:
 
 1. Pour commencer, nous allons créer un projet/repository sur Gitlab avec le +:
 
-![alt text](<Capture d'écran 2024-08-26 224143.png>)
-
-![alt text](<new project.png>)
+..\capture\1-1-prep-env-plus.png
 
 2. Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On aura plusieurs choix, mais étant donné que j'ai déjà téléchargé le code source sur mon ordinateur local depuis GitHub car j'ai voulu organiser mes fichiers, je vais créer un nouveau projet vièrge.
 
-![alt text](<create project.png>)
+..\capture\1-2-prep-env-create-project.png
 
 3. Il faut maintenant spécifier le nom du projet et mettre le projet en public. Pour les autre options qui sont optionnelles, je vais les laisser comme tels et je clique sur `Create project`.
 
-![alt text](image.png)
+..\capture\1-3-prep-env-create-project-form.png
 
 6. Une fois le projet créée, nous allons copier le lien du repo via le bouton en bleu `Code` et choisir la méthode `Clone with HTTPS` en cliquant sur l'icône presse papier à côté de l'URL.
 
-![alt text](<clone https.png>)
+..\capture\1-4-prep-env-clone-https.png
 
 7. Et sur mon ordinateur local, je vais naviguer vers le répertoire où j'ai mis le project. 
 
@@ -92,7 +90,7 @@ Nous allons utiliser les technologies ci-dessous:
 
 1. Après avoir terminer le push des fichiers, on peut remarquer cet icône qui nous indique qu'un pipeline est en cours d'execution.
 
-2. On va aller dans la bare latérale gauche sur `Build` > `Pipeline`. C'est là que nous pourrions voir la liste de tous les pipelines d'un projet. Et on peut voir que le pipeline de build s'est lancé automatiquement après le push de notre code. Mais comme notre fichier `.gitlab-ci.yml`ne contient pour l'instant que la partie `build`, il n'y pour l'instant qu'un seul job sur la partie `Stages`
+2. On va aller dans la barre latérale gauche sur `Build` > `Pipeline`. C'est là que nous pourrions voir la liste de tous les pipelines d'un projet. Et on peut voir que le pipeline de build s'est lancé automatiquement après le push de notre code. Mais comme notre fichier `.gitlab-ci.yml`ne contient pour l'instant que la partie `build`, il n'y pour l'instant qu'un seul job sur la partie `Stages`
 
 3. On peut cliquer sur le statu du job pour voir exactement la partie du stage qui est en cours d'execution qui est le `Build`
 
