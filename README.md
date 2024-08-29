@@ -57,15 +57,15 @@ Nous allons utiliser les technologies ci-dessous:
 
 1. Pour commencer, nous allons créer un projet/repository sur Gitlab avec le +:
 
-![plus-for-create-project](..\capture\1-1-prep-env-plus.png)
+![plus-for-create-project](./capture/1-1-prep-env-plus.png)
 
 2. Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On aura plusieurs choix, mais étant donné que j'ai déjà téléchargé le code source sur mon ordinateur local depuis GitHub car j'ai voulu organiser mes fichiers, je vais créer un nouveau projet vièrge.
 
-![create-project](..\capture\1-2-prep-env-create-project.png)
+![create-project](.\capture\1-2-prep-env-create-project.png)
 
 3. Il faut maintenant spécifier le nom du projet et mettre le projet en public. Pour les autre options qui sont optionnelles, je vais les laisser comme tels et je clique sur `Create project`.
 
-![create-project-form](..\capture\1-3-prep-env-create-project-form.png)
+![create-project-form](../capture/1-3-prep-env-create-project-form.png)
 
 4. Une fois le projet créée, nous allons copier le lien du repo via le bouton en bleu `Code` et choisir la méthode `Clone with HTTPS` en cliquant sur l'icône presse papier à côté de l'URL.
 
@@ -92,9 +92,9 @@ Nous allons utiliser les technologies ci-dessous:
 
 ![pipeline-running](..\capture\2-1-phase-build-pipeline-running.png)
 
-2. On va aller dans la barre latérale gauche sur `Build` > `Pipeline`. C'est là que nous pourrions voir la liste de tous les pipelines d'un projet. Et on peut voir que le pipeline de build s'est lancé automatiquement après le push de notre code. Mais comme notre fichier `.gitlab-ci.yml`ne contient pour l'instant que la partie `build`, il n'y pour l'instant qu'un seul job sur la partie `Stages`
+2. Si on patiente un peu, cet icône va passer en vert pour nous indiquer que le pipeline s'est bien déroulé avec succès. Mais on peut aussi aller dans la barre latérale gauche dans `Build` > `Pipeline`. C'est là que nous pourrions voir la liste de tous les pipelines d'un projet. Et on peut voir également que le pipeline de build s'est lancé automatiquement après le push de notre code.  Mais comme notre fichier `.gitlab-ci.yml`ne contient pour l'instant que la partie `build`, il n'y a pour l'instant qu'un seul job sur la partie `Stages`. On peut cliquer sur le statut du job pour voir exactement la partie du stage qui est en cours d'execution qui est le `docker-build`.
 
-3. On peut cliquer sur le statu du job pour voir exactement la partie du stage qui est en cours d'execution qui est le `Build`
+![2-2-phase-build-pipeline-list-state.png](..\capture\2-2-phase-build-pipeline-list-state.png)
 
 4. On peut maintenant cliquer sur `docker-build`pour voir la console du job qui nous montre tous les étapes du build: Depuis la génération du container Dind jusqu'au status finale du Job qui est ici `succeeded`qui nous indique le job s'est terminé sans erreur.
 
