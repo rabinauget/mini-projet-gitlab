@@ -57,11 +57,11 @@ Nous allons utiliser les technologies ci-dessous:
 
 1. Pour commencer, nous allons créer un projet/repository sur Gitlab avec le +:
 
-![plus-for-create-project](./capture/1-1-prep-env-plus.png)
+![plus-for-create-project](../capture/1-1-prep-env-plus.png)
 
 2. Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On aura plusieurs choix, mais étant donné que j'ai déjà téléchargé le code source sur mon ordinateur local depuis GitHub car j'ai voulu organiser mes fichiers, je vais créer un nouveau projet vièrge.
 
-![create-project](.\capture\1-2-prep-env-create-project.png)
+![create-project](../capture/1-2-prep-env-create-project.png)
 
 3. Il faut maintenant spécifier le nom du projet et mettre le projet en public. Pour les autre options qui sont optionnelles, je vais les laisser comme tels et je clique sur `Create project`.
 
@@ -69,7 +69,7 @@ Nous allons utiliser les technologies ci-dessous:
 
 4. Une fois le projet créée, nous allons copier le lien du repo via le bouton en bleu `Code` et choisir la méthode `Clone with HTTPS` en cliquant sur l'icône presse papier à côté de l'URL.
 
-![clone-https](..\capture\1-4-prep-env-clone-https.png)
+![clone-https](../capture/1-4-prep-env-clone-https.png)
 
 5. Et sur mon ordinateur local, je vais naviguer vers le répertoire où j'ai mis le project. 
 
@@ -88,22 +88,36 @@ Nous allons utiliser les technologies ci-dessous:
 
 # Phase de build: 
 
-1. Après avoir terminer le push des fichiers, on peut remarquer cet icône qui nous indique qu'un pipeline est en cours d'execution.
+1. Après avoir terminer le push des fichiers, on peut remarquer cet icône qui nous indique qu'un pipeline est en cours d'execution. Il s'est lancé automatiquement après l'action push. Mais on verra par la suite comment le déclencher après un évènement spécifique.
 
-![pipeline-running](..\capture\2-1-phase-build-pipeline-running.png)
+![pipeline-running](../capture/2-1-phase-build-pipeline-running.png)
 
-2. Si on patiente un peu, cet icône va passer en vert pour nous indiquer que le pipeline s'est bien déroulé avec succès. Mais on peut aussi aller dans la barre latérale gauche dans `Build` > `Pipeline`. C'est là que nous pourrions voir la liste de tous les pipelines d'un projet. Et on peut voir également que le pipeline de build s'est lancé automatiquement après le push de notre code.  Mais comme notre fichier `.gitlab-ci.yml`ne contient pour l'instant que la partie `build`, il n'y a pour l'instant qu'un seul job sur la partie `Stages`. On peut cliquer sur le statut du job pour voir exactement la partie du stage qui est en cours d'execution qui est le `docker-build`.
+2. Si on patiente un peu, cet icône va passer en vert pour nous indiquer que le pipeline s'est bien déroulé avec succès. Mais on peut aussi aller dans la barre latérale gauche dans `Build` > `Pipeline` pour voir la liste de tous les pipelines en cours ou ceux qui sont déjà terminé. Comme notre fichier `.gitlab-ci.yml` ne contient pour l'instant que la partie `docker-build`, il n'y a qu'un seul stage sur la partie `Stages`. On peut cliquer sur l'icône en vert pour voir quelle partie des jobs déclarés dans le fichier sont en cours d'execution.
 
-![2-2-phase-build-pipeline-list-state.png](..\capture\2-2-phase-build-pipeline-list-state.png)
+![2-2-phase-build-pipeline-list-state.png](../capture/2-2-phase-build-pipeline-list-state.png)
 
-4. On peut maintenant cliquer sur `docker-build`pour voir la console du job qui nous montre tous les étapes du build: Depuis la génération du container Dind jusqu'au status finale du Job qui est ici `succeeded`qui nous indique le job s'est terminé sans erreur.
+3. Si on clique sur `docker-build`, on sera redirigé vers la console qui où nous pourrions voir tous les étapes du build: Depuis la génération du container Dind jusqu'au statut finale `succeeded`, nous indiquant que le job s'est terminé sans erreur. S'il y a erreur, on verra un `failed` en rouge.
 
-5. Sur GitLab, chaque job crée un conteneur qui est supprimé une fois le job terminé. C'est pourquoi, dans notre fichier de pipeline `.gitlab-ci.yml`, nous sauvegardons l'image Docker en tant qu'artifact pour qu'elle soit disponible pour les jobs suivants. On peut vérifier que l'artifact a bien été sauvegardé dans `Build` > `Artifact` et la référence du commit de l'artfifact correspond bien à la référence du commit de notre pipeline `2ef8da8b`
+![2-3-phase-build-job-succeeded.png](../capture/2-3-phase-build-job-succeeded.png)
 
-6. Si on regarder le contenu de l'artifact, il contient 3 fichiers 
+4. Sur GitLab, chaque job crée un conteneur qui est supprimé une fois le job terminé. C'est pourquoi, dans notre fichier de pipeline `.gitlab-ci.yml`, nous sauvegardons l'image Docker sous forme d'artifact pour qu'elle soit disponible pour les jobs suivants. On peut vérifier que l'artifact a bien été sauvegardé dans `Build` > `Artifact` et la référence du commit de l'artfifact correspond bien à la référence du commit de notre pipeline `2ef8da8b`. Ou bien depuis la liste des pipelines, on peut aussi cliquer sur l'icône de téléchargement pour voir la liste des artifacts construits et cliquer sur l'un d'eux pour directement le télécharger. Mais on peut également le télécharger depuis `Build` > `Artifact`.
+
+![2-4-phase-build-artifact-list.png](../capture/2-4-phase-build-artifact-list.png)
+
+![2-4-phase-build-artifact-download.png](../capture/2-4-phase-build-artifact-download.png)
+
+5. Si on regarder le contenu de l'artefact, il contient 3 fichiers 
    + `artifacts.zip` : qui contient l'image docker .tar
    + `metadata.gz` : les metadonnés de l'artifact: nom de l'image, le droit du système sur le fichier, le crc pour la sécurité du fichier, la taille de l'image
    + `job.log`: les logs du pipeline que nous avons vu sur la partie 4.
+
+![2-5-phase-build-artifact-content.png](../capture/2-4-phase-build-artifact-content.png)
+
+6. Mais si on clique sur l'icône du dossier de l'artefact dans `Build` > `Artifact`, on verra le nom de l'artefact que nous avons donné dans `.gitlab-ci.yml`.
+
+![2-6-phase-build-artifact-directory.png](../capture/2-6-phase-build-artifact-directory.png)
+
+![2-6-phase-build-artifact-name-gitlab-ci.png](../capture/2-6-phase-build-artifact-name-gitlab-ci.png)
 
 Donc maintenant, nous pouvons passer à la phase de test d'acceptation.
 
