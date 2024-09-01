@@ -100,7 +100,7 @@ Nous allons utiliser les technologies ci-dessous:
 
 ![2-3-phase-build-job-succeeded.png](../capture/2-3-phase-build-job-succeeded.png)
 
-4. Sur GitLab, chaque job crée un conteneur qui est supprimé une fois le job terminé. C'est pourquoi, dans notre fichier de pipeline `.gitlab-ci.yml`, nous sauvegardons l'image Docker sous forme d'artéfact pour qu'il soit disponible pour les jobs suivants. On peut vérifier que l'artéfact a bien été sauvegardé dans `Build` > `Artifact` et la référence du commit de l'artfifact correspond bien à la référence du commit de notre pipeline `2ef8da8b`. Ou bien depuis la liste des pipelines, on peut aussi cliquer sur l'icône de téléchargement pour voir la liste des artéfacts construits et cliquer sur l'un d'eux pour directement le télécharger. Mais on peut également le télécharger depuis `Build` > `Artifact`.
+4. **Sur GitLab, à chaque job, un conteneur est créé puis supprimé une fois le job terminé.** C'est pourquoi, dans notre fichier de pipeline `gitlab-ci.yml`, nous sauvegardons l'image Docker sous forme d'artéfact pour qu'il soit disponible pour les jobs suivants. On peut vérifier que l'artéfact a bien été sauvegardé dans `Build` > `Artifact` et la référence du commit de l'artfifact correspond bien à la référence du commit de notre pipeline `2ef8da8b`. Ou bien depuis la liste des pipelines, on peut aussi cliquer sur l'icône de téléchargement pour voir la liste des artéfacts construits et cliquer sur l'un d'eux pour directement le télécharger. Mais on peut également le télécharger depuis `Build` > `Artifact`.
 
 **Capture dans `Build` > `Artifact`**
 
@@ -133,8 +133,6 @@ Donc maintenant, nous pouvons passer à la phase de test d'acceptation.
 
 Dans cette section, nous utiliserons l'artéfact généré lors de la phase de build pour créer un conteneur Docker et vérifier que notre application web fonctionne correctement. On peut voir à la ligne 37 comment charger cet artéfact dans le conteneur pour la phase d'acceptation. 
 
-**Comme préciser plus haut, à chaque étape de stage, un conteneur est créé pour l'execution des commandes pour ce job puis supprimé à la fin du job. C'est pourquoi nous étions obligé de sauvegarder l'image docker sous forme d'artéfact.**
-
 Etant donné que nous avons confirmer que l'artéfact est bien présent dans `Build` > `Artifact` puis ajouté la section **test d'acceptance** dans le fichier `gitlab-ci.yml`, on peut maintenant faire un push du repo local vers le repo distant gitlab.
 
 1. Une fois le push effectué, on peut voir dans la liste des pipelines (`Build` > `Pipeline`) qu'un nouveau pipeline est en cours d'execution et on remarquera que la partie `Stages` contient maintenant deux jobs: le premier est celui de la phase de build et le deuxième pour la phase d'acceptance. Si on clique sur la référence du pipeline, on est redirigé vers une page qui va nous afficher les détails concernant ce pipeline et les différents `Stages`.
@@ -147,6 +145,8 @@ Etant donné que nous avons confirmer que l'artéfact est bien présent dans `Bu
 
 ![3-1-2-phase-acceptance-job-name.png](../capture/3-1-2-phase-acceptance-job-name.png)
 
-2. Maintenant, on peut faire un clique sur le test d'acceptance pour voir la console du job en question. On peut constater ici que le job s'est bien déroulé puisque qu'on a `Succeeded` comme retour.
+2. Maintenant, on peut faire un clique sur le test d'acceptance pour voir la console du job en question. On peut constater ici que le job s'est bien déroulé puisque nous avons le code de retour `200` et `Succeeded` comme retour.
 
 ![3-2-phase-acceptance-console.png](../capture/3-2-phase-acceptance-console.png)
+
+# Release image
