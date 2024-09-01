@@ -40,7 +40,7 @@ test acceptation:
     - apk --no-cache add curl
     - docker ps -a
     - docker exec webapp ls /var/www/html/
-    - curl -s -o /dev/null -w "%{http_code}" http://localhost:80 | grep "200"
+    - curl -s -o /dev/null -w "%{http_code}" http://docker:80 | grep "200"
 
 .release image:
   stage: Release image
