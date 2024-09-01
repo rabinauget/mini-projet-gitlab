@@ -38,8 +38,6 @@ test acceptation:
     - docker run -d -p 80:80 --name webapp mini_projet_gitlab
     - sleep 5
     - apk --no-cache add curl
-    - docker ps -a
-    - docker exec webapp ls /var/www/html/
     - curl -s -o /dev/null -w "%{http_code}" http://docker | grep "200"
 
 .release image:
