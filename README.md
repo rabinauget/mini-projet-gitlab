@@ -16,9 +16,9 @@ Ce mini projet est dans le cadre du bootcamp Devops de Eazytraing
 
 # Contexte du projet
 
-Ce projet a pour objectif de mettre en place un pipeline CI/CD (Intégration Continue et Déploiement Continu) afin d'automatiser le processus de livraison et de déploiement d'une application. 
+Ce projet vise à implémenter un pipeline CI/CD (Intégration Continue et Déploiement Continu) pour automatiser et optimiser le processus de livraison et de déploiement d'une application. Réduisant ainsi les erreurs manuelles, accélérant les mises à jour, et garantissant une intégration fluide et cohérente à chaque étape. Et surtout, cela renforcera la collaboration entre les équipes de développement et d'opérations.
 
-Le pipeline sera déclenché à chaque push de code dans le repo GitLab, garantissant ainsi, que les nouvelles modifications sont automatiquement construits (phase de build), testées, intégrées et déployées sur les serveurs de Test (Staging) et de Production.
+Le pipeline se déclenchera à chaque push de code vers le dépôt GitLab, garantissant que les nouvelles modifications sont automatiquement compilées, testées, intégrées, puis déployées sur les serveurs de Test (Staging) et de Production.
 
 # Fonctionnement du pipeline
 
@@ -26,13 +26,13 @@ Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
 1. **La phase de Build :** consistera à la compilation du code source et construction des artefacts nécessaires pour le déploiement.
 
-2. **La phase de Test de l'artifact (Test d'acceptance) :** sera la partie où nous allons tester et confirmer que l'artifact précédement créée est bien fonctionnel.
+2. **La phase de Test de l'artifact (Test d'acceptance) :** sera la partie où nous allons tester et confirmer que l'artéfact précédement créé est bien fonctionnel.
 
-3. **La phase de sauvegarde de l'image (Release image) :** Après avoir confirmer que l'artéfact est bien fonctionnel, nous allons le sauvegarder afin de pouvoir le déployer sur les serveurs tests/prod ou le réutiliser ultérieurement.
+3. **La phase de sauvegarde de l'image (Release image) :** Après avoir confirmer que l'artéfact est fonctionnel, nous allons le sauvegarder afin de pouvoir le déployer sur les serveurs tests/prod ou le réutiliser ultérieurement.
 
-4. **La phase de déploiement sur le serveur Test (Staging) :** sera la partie où nous allons effectuer le déploiement sur le serveur test. Cela va permettre de tester l'application par exemple.
+4. **La phase de déploiement sur le serveur Test (Staging) :** Cette étape concerne le déploiement sur le serveur de test. Si des erreurs surviennent dans la chaîne de déploiement, elles seront détectées avant le déploiement sur le serveur de production. Mais on pourra également en profiter pour effectuer des tests sur les fonctionnalités de l'application.
 
-5. **La phase de révision (Deploy Review) :** L'application, après avoir été testée et validée, doit être déployée en production. Mais avant cela, elle passera par une phase de révision pour s'assurer qu'elle fonctionne correctement et sans erreurs.
+5. **La phase de révision (Deploy Review) :** Une fois confirmée qu'il n'y a pas de problème dans la chaîne, l'application doit être déployée en production. Cependant, avant cela, elle passera par une phase de révision pour s'assurer que l'application est bien fonctionnelle et accessible.
 
 6. **La phase de déploimeent sur le serveur Prod :** L'application, ayant été confirmée comme fonctionnelle à toutes les étapes, peut maintenant être déployée sur l'environnement de production pour être utilisée par les clients.
 
@@ -48,7 +48,7 @@ Donc le pipeline sera composé de:
 
 Nous allons utiliser les technologies ci-dessous:
 
-+ **Physical host :** Windows 11
++ **Hôte physique :** Windows 11 avec un CPU intel core i7-8ème 2.1GHz et 16GB RAM
 + **Gitlab :** Nous allons utiliser le gitlab public, accessible sur https://gitlab.com/
 + **Runner :** Et pour le runner, nous allons utiliser les runners de Gitlab car Gitlab fourni déjà toutes sortes de runners. Pour ce projet, nous allons utiliser Docker DinD (Docker in Docker)
 + **Heroku :** Et pour déployer notre application, nous allons le déployer sur Heroku qui est une plateforme de déploiement d'application (https://www.heroku.com/)
@@ -100,7 +100,7 @@ Nous allons utiliser les technologies ci-dessous:
 
 ![2-3-phase-build-job-succeeded.png](../capture/2-3-phase-build-job-succeeded.png)
 
-4. Sur GitLab, chaque job crée un conteneur qui est supprimé une fois le job terminé. C'est pourquoi, dans notre fichier de pipeline `.gitlab-ci.yml`, nous sauvegardons l'image Docker sous forme d'artifact pour qu'elle soit disponible pour les jobs suivants. On peut vérifier que l'artifact a bien été sauvegardé dans `Build` > `Artifact` et la référence du commit de l'artfifact correspond bien à la référence du commit de notre pipeline `2ef8da8b`. Ou bien depuis la liste des pipelines, on peut aussi cliquer sur l'icône de téléchargement pour voir la liste des artifacts construits et cliquer sur l'un d'eux pour directement le télécharger. Mais on peut également le télécharger depuis `Build` > `Artifact`.
+4. Sur GitLab, chaque job crée un conteneur qui est supprimé une fois le job terminé. C'est pourquoi, dans notre fichier de pipeline `.gitlab-ci.yml`, nous sauvegardons l'image Docker sous forme d'artéfact pour qu'il soit disponible pour les jobs suivants. On peut vérifier que l'artéfact a bien été sauvegardé dans `Build` > `Artifact` et la référence du commit de l'artfifact correspond bien à la référence du commit de notre pipeline `2ef8da8b`. Ou bien depuis la liste des pipelines, on peut aussi cliquer sur l'icône de téléchargement pour voir la liste des artéfacts construits et cliquer sur l'un d'eux pour directement le télécharger. Mais on peut également le télécharger depuis `Build` > `Artifact`.
 
 **Capture dans `Build` > `Artifact`**
 
@@ -110,14 +110,14 @@ Nous allons utiliser les technologies ci-dessous:
 
 ![2-4-phase-build-artifact-download.png](../capture/2-4-phase-build-artifact-download.png)
 
-5. Si on regarder le contenu de l'artefact, il contient 3 fichiers 
+5. Si on regarder le contenu de l'artéfact, il contient 3 fichiers 
    + **`artifacts.zip` :** qui contient l'image docker .tar
-   + **`metadata.gz` :** les metadonnés de l'artifact: nom de l'image, le droit du système sur le fichier, le crc pour la sécurité du fichier, la taille de l'image
+   + **`metadata.gz` :** les metadonnés de l'artéfact: nom de l'image, le droit du système sur le fichier, le crc pour la sécurité du fichier, la taille de l'image
    + **`job.log`:** les logs du pipeline que nous avons vu sur la partie 4.
 
 ![2-5-phase-build-artifact-content.png](../capture/2-5-phase-build-artifact-content.png)
 
-6. Mais si on clique sur l'icône du dossier de l'artefact dans `Build` > `Artifact`, on verra le nom de l'artefact que nous avons spécifié dans `.gitlab-ci.yml`.
+6. Mais si on clique sur l'icône du dossier de l'artéfact dans `Build` > `Artifact`, on verra le nom de l'artéfact que nous avons spécifié dans `.gitlab-ci.yml`.
 
 **Capture de l'icône du dossier**
 
@@ -129,5 +129,7 @@ Nous allons utiliser les technologies ci-dessous:
 
 Donc maintenant, nous pouvons passer à la phase de test d'acceptation.
 
-# Phase d'acceptant
+# Phase d'acceptance
+
+
 
