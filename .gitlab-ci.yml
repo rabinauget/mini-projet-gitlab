@@ -35,7 +35,7 @@ test acceptation:
   stage: Test acceptation
   script:
     - docker load < mini_projet_gitlab.tar
-    - docker run -d -p 80:80 --name webapp mini_projet_gitlab
+    - docker run -d --name webapp mini_projet_gitlab
     - sleep 5
     - apk --no-cache add curl
     - docker ps -a
