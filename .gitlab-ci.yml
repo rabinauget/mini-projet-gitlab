@@ -23,7 +23,6 @@ stages:
     - curl "https://$DOMAIN" | grep "Hello world!"
 
 docker-build:
-  # Use the official docker image
   stage: Build
   script:
     - docker build -t  mini_projet_gitlab .
@@ -33,14 +32,13 @@ docker-build:
       - mini_projet_gitlab.tar
 
 test acceptation:
-  # Official docker image
   stage: Test acceptation
   script:
     - docker load < mini_projet_gitlab.tar
     - docker run -d --name webapp mini_projet_gitlab
     - sleep 5
     - apk --no-cache add curl
-    - curl "http://docker" | grep  "200"
+    - curl "http://docker:80" | grep  "200"
 
 .release image:
   stage: Release image
