@@ -38,7 +38,7 @@ test acceptation:
     - docker run -d --name webapp mini_projet_gitlab
     - sleep 5
     - apk --no-cache add curl
-    - curl "http://docker" | grep  "200"
+    - curl "http://localhost" | grep  "200"
 
 .release image:
   stage: Release image
