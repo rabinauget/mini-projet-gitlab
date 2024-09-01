@@ -35,12 +35,12 @@ test acceptation:
   stage: Test acceptation
   script:
     - docker load < mini_projet_gitlab.tar
-    - docker run -d -p 8080:80 --name webapp mini_projet_gitlab
+    - docker run -d -p 80:80 --name webapp mini_projet_gitlab
     - sleep 5
     - apk --no-cache add curl
     - docker ps -a
     - docker exec webapp ls /var/www/html/
-    - curl "http://docker:8080" | grep  "200"
+    - curl "http://docker:80" | grep "200"
 
 .release image:
   stage: Release image
