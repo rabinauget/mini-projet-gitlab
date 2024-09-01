@@ -133,17 +133,17 @@ Donc maintenant, nous pouvons passer à la phase de test d'acceptation.
 
 Dans cette section, nous utiliserons l'artéfact généré lors de la phase de build pour créer un conteneur Docker et vérifier que notre application web fonctionne correctement. On peut voir à la ligne 37 comment charger cet artéfact dans le conteneur pour la phase d'acceptation. 
 
-**Comme préciser plus haut, à chaque étape stage, un conteneur. C'est pourquoi nous avons été obligé de sauvegarder l'image docker sous forme d'artéfact.**
+**Comme préciser plus haut, à chaque étape de stage, un conteneur est créé pour l'execution des commandes pour ce job puis supprimé à la fin du job. C'est pourquoi nous étions obligé de sauvegarder l'image docker sous forme d'artéfact.**
 
-Etant donné que nous avons ajouté confirmer que l'artéfact est bien présent et ajouté la section **test d'acceptance** dans le fichier `gitlab-ci.yml`, on peut maintenant faire un push du repo local vers le repo distant gitlab.
+Etant donné que nous avons confirmer que l'artéfact est bien présent dans `Build` > `Artifact` puis ajouté la section **test d'acceptance** dans le fichier `gitlab-ci.yml`, on peut maintenant faire un push du repo local vers le repo distant gitlab.
 
-1. Une fois le push effectué, on peut voir dans la liste des pipelines (`Build` > `Pipeline`) qu'un nouveau pipeline est en cours d'execution et on remarquera que la partie `Stages` contient maintenant deux jobs: le premier est celui de la phase de build et le deuxième pour la phase d'acceptance. Et si on clique sur la référence du pipeline, on est redirigé vers une page qui va nous afficher les détails concernant ce pipeline et les différents `Stages`.
+1. Une fois le push effectué, on peut voir dans la liste des pipelines (`Build` > `Pipeline`) qu'un nouveau pipeline est en cours d'execution et on remarquera que la partie `Stages` contient maintenant deux jobs: le premier est celui de la phase de build et le deuxième pour la phase d'acceptance. Si on clique sur la référence du pipeline, on est redirigé vers une page qui va nous afficher les détails concernant ce pipeline et les différents `Stages`.
 
 **Capture du nouveau pipeline:**
 
 ![3-1-1-phase-acceptance-new-job.png](../capture/3-1-1-phase-acceptance-new-job.png)
 
-**Capture du nouveau pipeline:**
+**Capture des détails du pipeline:**
 
 ![3-1-2-phase-acceptance-job-name.png](../capture/3-1-2-phase-acceptance-job-name.png)
 
