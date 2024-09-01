@@ -37,7 +37,8 @@ test acceptation:
     - docker load < mini_projet_gitlab.tar
     - docker run -d --name webapp mini_projet_gitlab
     - sleep 5
-    - apk --no-cache add curl && coreutils
+    - apk --no-cache add curl
+    - docker ps -a
     - docker exec mini_projet_gitlab ls /var/www/html/
     - curl "http://localhost:80" | grep  "200"
 
