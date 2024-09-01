@@ -39,7 +39,7 @@ test acceptation:
     - sleep 5
     - apk --no-cache add curl
     - docker ps -a
-    - docker exec mini_projet_gitlab ls /var/www/html/
+    - docker exec webapp ls /var/www/html/
     - curl "http://localhost:80" | grep  "200"
 
 .release image:
