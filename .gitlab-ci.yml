@@ -50,7 +50,7 @@ release image:
     - docker push "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
     - docker push "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
 
-deploy staging:
+.deploy staging:
   stage: Deploy staging
   environment:
     name: staging
@@ -123,7 +123,7 @@ deploy staging:
   <<: *test
   stage: Test staging
   variables:
-    DOMAIN: eazytraining-staging-auget-d12bb760ad6a.herokuapp.com
+    DOMAIN: https://mini-projet-gitlab-staging-0768c7d7e9e9.herokuapp.com/
 
 .test prod:
   <<: *test
