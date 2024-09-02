@@ -40,7 +40,7 @@ test acceptation:
     - apk --no-cache add curl
     - curl -s -o /dev/null -w "%{http_code}" http://docker | grep "200"
 
-.release image:
+release image:
   stage: Release image
   script:
     - docker load < mini_projet_gitlab.tar

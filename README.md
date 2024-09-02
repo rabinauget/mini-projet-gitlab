@@ -26,7 +26,7 @@ Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
 1. **La phase de Build :** consistera à la compilation du code source et construction des artefacts nécessaires pour le déploiement.
 
-2. **La phase de Test de l'artifact (Test d'acceptance) :** sera la partie où nous allons tester et confirmer que l'artéfact précédement créé est bien fonctionnel.
+2. **La phase de Test de l'artifact (Test d'acceptation) :** sera la partie où nous allons tester et confirmer que l'artéfact précédement créé est bien fonctionnel.
 
 3. **La phase de sauvegarde de l'image (Release image) :** Après avoir confirmer que l'artéfact est fonctionnel, nous allons le sauvegarder afin de pouvoir le déployer sur les serveurs tests/prod ou le réutiliser ultérieurement.
 
@@ -129,13 +129,13 @@ Nous allons utiliser les technologies ci-dessous:
 
 Donc maintenant, nous pouvons passer à la phase de test d'acceptation.
 
-# Phase d'acceptance
+# Phase de test d'acceptation
 
 Dans cette section, nous utiliserons l'artéfact généré lors de la phase de build pour créer un conteneur Docker et vérifier que notre application web fonctionne correctement. On peut voir à la ligne 37 comment charger cet artéfact dans le conteneur pour la phase d'acceptation. 
 
-Etant donné que nous avons confirmer que l'artéfact est bien présent dans `Build` > `Artifact` puis ajouté la section **test d'acceptance** dans le fichier `gitlab-ci.yml`, on peut maintenant faire un push du repo local vers le repo distant gitlab.
+Etant donné que nous avons confirmer que l'artéfact est bien présent dans `Build` > `Artifact` puis ajouté la section **test d'acceptation** dans le fichier `gitlab-ci.yml`, on peut maintenant faire un push du repo local vers le repo distant gitlab.
 
-1. Une fois le push effectué, on peut voir dans la liste des pipelines (`Build` > `Pipeline`) qu'un nouveau pipeline est en cours d'execution et on remarquera que la partie `Stages` contient maintenant deux jobs: le premier est celui de la phase de build et le deuxième pour la phase d'acceptance. Si on clique sur la référence du pipeline, on est redirigé vers une page qui va nous afficher les détails concernant ce pipeline et les différents `Stages`.
+1. Une fois le push effectué, on peut voir dans la liste des pipelines (`Build` > `Pipeline`) qu'un nouveau pipeline est en cours d'execution et on remarquera que la partie `Stages` contient maintenant deux jobs: le premier est celui de la phase de build et le deuxième pour la phase d'acceptation. Si on clique sur la référence du pipeline, on est redirigé vers une page qui va nous afficher les détails concernant ce pipeline et les différents `Stages`.
 
 **Capture du nouveau pipeline:**
 
@@ -145,8 +145,9 @@ Etant donné que nous avons confirmer que l'artéfact est bien présent dans `Bu
 
 ![3-1-2-phase-acceptance-job-name.png](../capture/3-1-2-phase-acceptance-job-name.png)
 
-2. Maintenant, on peut faire un clique sur le test d'acceptance pour voir la console du job en question. On peut constater ici que le job s'est bien déroulé puisque nous avons le code de retour `200` et `Succeeded` comme retour.
+2. Maintenant, on peut faire un clique sur le test d'acceptation pour voir la console du job en question. On peut constater ici que le job s'est bien déroulé puisque nous avons le code de retour `200` et `Succeeded` comme retour.
 
 ![3-2-phase-acceptance-console.png](../capture/3-2-phase-acceptance-console.png)
 
 # Release image
+
