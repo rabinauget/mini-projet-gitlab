@@ -171,3 +171,4 @@ Nous avons validé le bon fonctionnement de l'image. Maintenant, nous allons la 
 ![4-3-release-image-job-stage.png](../capture/4-3-release-image-job-stage.png)
 
 # Deploy staging
+
