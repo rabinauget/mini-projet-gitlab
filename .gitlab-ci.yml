@@ -62,8 +62,8 @@ deploy staging:
     - npm install -g heroku
     - heroku container:login
     - heroku create mini-projet-gitlab-staging || echo "project already exist"
-    - heroku container:push -a mini-projet-gitlab-staging web
-    - heroku container:release -a mini-projet-gitlab-staging web
+    - heroku container:push -a mini-projet-gitlab web
+    - heroku container:release -a mini-projet-gitlab web
 
 .deploy prod:
   stage: Deploy prod
