@@ -50,20 +50,20 @@ release image:
     - docker push "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
     - docker push "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
 
-.deploy staging:
+deploy staging:
   stage: Deploy staging
   environment:
     name: staging
-    url: https://eazytraining-staging-auget-d12bb760ad6a.herokuapp.com/
+    url: https://mini-projet-gitlab-staging-0768c7d7e9e9.herokuapp.com/
   only:
     - master
   script:
     - apk --no-cache add npm
     - npm install -g heroku
     - heroku container:login
-    - heroku create eazytraining-staging-auget || echo "project already exist"
-    - heroku container:push -a eazytraining-staging-auget web
-    - heroku container:release -a eazytraining-staging-auget web
+    - heroku create mini-projet-gitlab-staging || echo "project already exist"
+    - heroku container:push -a mini-projet-gitlab-staging web
+    - heroku container:release -a mini-projet-gitlab-staging web
 
 .deploy prod:
   stage: Deploy prod

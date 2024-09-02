@@ -30,7 +30,7 @@ Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
 3. **La phase de sauvegarde de l'image (Release image) :** Après avoir confirmer que l'artéfact est fonctionnel, nous allons le sauvegarder afin de pouvoir le déployer sur les serveurs tests/prod ou le réutiliser ultérieurement.
 
-4. **La phase de déploiement sur le serveur Test (Staging) :** Cette étape concerne le déploiement sur le serveur de test. Si des erreurs surviennent dans la chaîne de déploiement, elles seront détectées avant le déploiement sur le serveur de production. Mais on pourra également en profiter pour effectuer des tests sur les fonctionnalités de l'application.
+4. **La phase de déploiement sur le serveur Test ( Deploy staging) :** Cette étape concerne le déploiement sur le serveur de test. Si des erreurs surviennent dans la chaîne de déploiement, elles seront détectées avant le déploiement sur le serveur de production. Mais on pourra également en profiter pour effectuer des tests sur les fonctionnalités de l'application.
 
 5. **La phase de révision (Deploy Review) :** Une fois confirmée qu'il n'y a pas de problème dans la chaîne, l'application doit être déployée en production. Cependant, avant cela, elle passera par une phase de révision pour s'assurer que l'application est bien fonctionnelle et accessible.
 
@@ -151,3 +151,13 @@ Etant donné que nous avons confirmer que l'artéfact est bien présent dans `Bu
 
 # Release image
 
+Nous avons validé le bon fonctionnement de l'image. Maintenant, nous allons la versionner pour assurer squ'il soit réutilisable, garantir la traçabilité des mises à jour et faciliter son déploiement cohérent à travers différents environnements. Cela permet également un retour facile à une version précédente en cas de besoin et une meilleure gestion des versions dans les pipelines CI/CD.
+
+Pour ce faire, il faudra d'abord déclarer les variables dans la bare latérale gauche `Settings > CI/CD > Variables`.
+
+    + la première sera la clé API de mon compte HEROKU sur https://dashboard.heroku.com/account (Mon compte > Account Settings > API Key)
+    + et la deuxième le nom de l'image `registry.gitlab.com/skynet17/mini-projet-gitlab/mini_projet_gitlab`, où la première partie est le serveur sur lequel se trouve le registry de gitlab, puis mon espace à mois, ensuite le projet sur lequel je travail et enfin le nom de mon image
+
+![4-1-release-image-variable.png](../capture/4-1-release-image-variable.png)
+
+# Deploy staging
