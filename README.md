@@ -153,11 +153,21 @@ Etant donné que nous avons confirmer que l'artéfact est bien présent dans `Bu
 
 Nous avons validé le bon fonctionnement de l'image. Maintenant, nous allons la versionner pour assurer squ'il soit réutilisable, garantir la traçabilité des mises à jour et faciliter son déploiement cohérent à travers différents environnements. Cela permet également un retour facile à une version précédente en cas de besoin et une meilleure gestion des versions dans les pipelines CI/CD.
 
-Pour ce faire, il faudra d'abord déclarer les variables dans la bare latérale gauche `Settings > CI/CD > Variables`.
+1. Pour ce faire, il faudra d'abord déclarer les variables dans la bare latérale gauche `Settings > CI/CD > Variables`.
 
     + la première sera la clé API de mon compte HEROKU sur https://dashboard.heroku.com/account (Mon compte > Account Settings > API Key)
     + et la deuxième le nom de l'image `registry.gitlab.com/skynet17/mini-projet-gitlab/mini_projet_gitlab`, où la première partie est le serveur sur lequel se trouve le registry de gitlab, puis mon espace à mois, ensuite le projet sur lequel je travail et enfin le nom de mon image
 
 ![4-1-release-image-variable.png](../capture/4-1-release-image-variable.png)
+
+2. Nous pouvons désormais effectuer un push de notre code après avoir ajouté la section `Release image` dans notre fichier `.gitlab-ci.yml` et le pipeline va se lancer aussitôt. On vera donc dans la liste des pipelines qu'un nouveau pipeline est en cours d'éxecution et cette fois ci, il y aura trois stages. Et comme d'habitude, on peut cliquer sur la référence du pipeline pour voir le détails du pipeline:
+
+**Capture dans liste des pipelines**
+
+![4-2-release-image-pipeline.png](../capture/4-2-release-image-pipeline.png)
+
+**Capture des détails du pipeline**
+
+![4-3-release-image-job-stage.png](../capture/4-3-release-image-job-stage.png)
 
 # Deploy staging
