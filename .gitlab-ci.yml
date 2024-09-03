@@ -59,7 +59,7 @@ deploy staging:
     - main
   script:
     - apk --no-cache add npm
-    - npm install -g heroku
+    - npm i -g heroku@7.68.0
     - heroku container:login
     - heroku create mini-projet-gitlab-staging-aug || echo "project already exist"
     - heroku container:push -a mini-projet-gitlab-staging-aug web
