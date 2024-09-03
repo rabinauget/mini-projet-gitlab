@@ -38,7 +38,7 @@ test acceptation:
     - docker run -d -p 80:80 --name webapp mini_projet_gitlab
     - sleep 5
     - apk --no-cache add curl
-    - curl -s -o /dev/null -w "%{http_code}" http://docker | grep "200"
+    - curl "http://docker" | grep  "Dimension"
 
 release image:
   stage: Release image
@@ -63,7 +63,6 @@ deploy staging:
     - heroku container:login
     - heroku create mini-projet-gitlab-staging-aug || echo "project already exist"
     - heroku container:push -a mini-projet-gitlab-staging-aug web
-    - heroku logs --tail
     - heroku container:release -a mini-projet-gitlab-staging-aug web
 
 .deploy prod:
