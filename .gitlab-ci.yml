@@ -63,6 +63,7 @@ deploy staging:
     - heroku container:login
     - heroku create mini-projet-gitlab-staging-aug || echo "project already exist"
     - heroku container:push -a mini-projet-gitlab-staging-aug web
+    - heroku logs -n 100
     - heroku container:release -a mini-projet-gitlab-staging-aug web
 
 .deploy prod:
