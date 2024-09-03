@@ -54,16 +54,16 @@ deploy staging:
   stage: Deploy staging
   environment:
     name: staging
-    url: https://mini-projet-gitlab-staging-0768c7d7e9e9.herokuapp.com/
+    url: https://mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com/
   only:
     - main
   script:
     - apk --no-cache add npm
     - npm install -g heroku
     - heroku container:login
-    - heroku create mini-projet-gitlab-staging || echo "project already exist"
-    - heroku container:push -a mini-projet-gitlab-staging web
-    - heroku container:release -a mini-projet-gitlab-staging web
+    - heroku create mini-projet-gitlab-staging-aug || echo "project already exist"
+    - heroku container:push -a mini-projet-gitlab-staging-aug web
+    - heroku container:release -a mini-projet-gitlab-staging-aug web
 
 .deploy prod:
   stage: Deploy prod
