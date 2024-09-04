@@ -47,6 +47,7 @@ test acceptation:
 release image:
   stage: Release image
   script:
+    - echo ${IMAGE_NAME}
     - docker load < mini_projet_gitlab.tar
     - docker tag mini_projet_gitlab "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
     - docker tag mini_projet_gitlab "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"

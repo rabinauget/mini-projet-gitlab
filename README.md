@@ -171,3 +171,23 @@ Nous avons validé le bon fonctionnement de l'image. Maintenant, nous allons la 
 
 # Deploy staging
 
+1. Maintenant, nous allons d'abord deployer l'application sur un environnement de staging puis une fois validée qu'il n'y a pas de souci, c'est là que nous allons déployer sur l'environnement de prod. Mais avant cela, nous allons créer une nouvelle branche `staging`. Nous verrons par la suite comment faire pour déplouer sur la prod avec la branche `main` à l'aide d'un `merge request`.
+
+Pour cela, nous allons utiliser les commandes ci-dessous:
+
+    + `git -checkout -b staging`: pour créer la branche et dont le nom sera `staging`
+    + `git add .`: pour valider la modification
+    + `git commit -m "add branch staging"`: pour mettre une petitie note sur l'action
+    + `git push -u origin staging`: pour pousser les modifications vers le repo distant
+
+Et si on regarde si notre repo distant (sur Gitlab), on verra une nouvelle branche au nom de `staging` et nous aurons également tous les fichiers qui étaient dans la branche `main`:
+
+![5-1-staging-create-branch.png](../capture/5-1-staging-create-branch.png)
+
+2. 
+
+
+
+
+
+
