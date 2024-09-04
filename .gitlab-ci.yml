@@ -24,6 +24,7 @@ stages:
     - master
   script:
     - apk --no-cache add curl
+    - echo $DOMAIN
     - curl "https://$DOMAIN" | grep -i "Dimension"  
 
 docker-build:
@@ -77,7 +78,7 @@ test staging:
   only:
     - staging
   variables:
-    DOMAIN: https://mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com/
+    DOMAIN: mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com
 
 .deploy prod:
   stage: Deploy prod
