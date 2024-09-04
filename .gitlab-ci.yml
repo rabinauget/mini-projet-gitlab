@@ -39,7 +39,7 @@ test acceptation:
   stage: Test acceptation
   script:
     - docker load < mini_projet_gitlab.tar
-    - docker run -d -p $APP_CONTAINER_PORT:$APP_EXPOSED_PORT -e PORT=$APP_CONTAINER_PORT --name webapp webpage
+    - docker run -d -p $APP_CONTAINER_PORT:$APP_EXPOSED_PORT -e PORT=$APP_CONTAINER_PORT --name webapp mini_projet_gitlab
     - sleep 5
     - apk --no-cache add curl
     - curl "http://docker:$APP_CONTAINER_PORT" | grep -i "Dimension"
