@@ -80,30 +80,15 @@ test staging:
   variables:
     DOMAIN: mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com
 
-.deploy prod:
-  stage: Deploy prod
-  environment:
-    name: prod
-    url: https://eazytraining-prod-auget-fb966a39c4c4.herokuapp.com/
-  only:
-    - master
-  script:
-    - apk --no-cache add npm
-    - npm install -g heroku
-    - heroku container:login
-    - heroku create eazytraining-prod-auget  || echo "project already exist"
-    - heroku container:push -a eazytraining-prod-auget web
-    - heroku container:release -a eazytraining-prod-auget web
-
-.deploy review:
+deploy review:
   stage: Deploy review
   only:
     - merge_requests
   script:
     - apk --no-cache add npm jq
-    - npm install -g heroku
+    - npm i -g heroku@7.68.0
     - heroku container:login
-    - APP_NAME=eazytraining-auget-$CI_COMMIT_REF_NAME
+    - APP_NAME=mini-projet-gitlab-$CI_COMMIT_REF_NAME
     - "[[ ${#APP_NAME} -gt 31 ]] && echo 'the name of the heroku application you want to create is longer than 30 characters' && exit 1"
     - heroku create $APP_NAME  || echo "project already exist"
     - heroku container:push -a $APP_NAME web
@@ -130,9 +115,24 @@ test staging:
   when: manual
   script:
     - apk --no-cache add npm
-    - npm install -g heroku
+    - npm i -g heroku@7.68.0
     - heroku container:login
     - heroku apps:destroy -a eazytraining-auget-$CI_COMMIT_REF_NAME -c eazytraining-auget-$CI_COMMIT_REF_NAME
+
+.deploy prod:
+  stage: Deploy prod
+  environment:
+    name: prod
+    url: https://eazytraining-prod-auget-fb966a39c4c4.herokuapp.com/
+  only:
+    - master
+  script:
+    - apk --no-cache add npm
+    - npm i -g heroku@7.68.0
+    - heroku container:login
+    - heroku create eazytraining-prod-auget  || echo "project already exist"
+    - heroku container:push -a eazytraining-prod-auget web
+    - heroku container:release -a eazytraining-prod-auget web
 
 .test prod:
   <<: *test

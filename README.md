@@ -222,6 +222,8 @@ Nous avons confirmé que l'application est accessible via son URL de staging en 
 
 ![6-2-test-stagine-console.png](../capture/6-2-test-stagine-console.png)
 
+# Deploy review
+
 
 
 
