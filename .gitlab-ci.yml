@@ -60,7 +60,7 @@ deploy staging:
     name: staging
     url: https://mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com/
   only:
-    - main
+    - staging
   script:
     - apk --no-cache add npm
     - npm i -g heroku@7.68.0
