@@ -171,3 +171,60 @@ Nous avons validé le bon fonctionnement de l'image. Maintenant, nous allons la 
 
 # Deploy staging
 
+1. Maintenant, nous allons d'abord deployer l'application sur un environnement de staging puis une fois validée qu'il n'y a pas de souci, nous allons déployer sur l'environnement de prod. Mais avant cela, nous allons créer une nouvelle branche `staging`. Nous verrons par la suite comment faire pour déployer sur la prod avec la branche `main` à l'aide d'un `merge request`.
+
+Pour cela, nous allons utiliser les commandes ci-dessous:
+
+    + `git -checkout -b staging`: pour créer la branche et dont le nom sera `staging`
+    + `git add .`: pour valider la modification
+    + `git commit -m "add branch staging"`: pour mettre une petitie note sur l'action
+    + `git push -u origin staging`: pour pousser les modifications vers le repo distant
+
+Et si on regarde notre repo distant (sur Gitlab), on verra une nouvelle branche au nom de `staging` et nous aurions également tous les fichiers qui étaient dans la branche `main`:
+
+![5-1-staging-create-branch.png](../capture/5-1-staging-create-branch.png)
+
+2. On peut voir que le pipeline s'est déjà lancé au push des modifications et cette fois, nous avons quatre stages qui vont se lancer l'un après l'autre.
+
+**Capture depuis pipeline:**
+
+![5-2-staging-create-branch-pipeline.png](../capture/5-2-staging-create-branch-pipeline.png)
+
+**Details du pipeline:**
+
+![5-2-staging-create-branche-pipeline-details.png](../capture/5-2-staging-create-branche-pipeline-details.png)
+
+3. L'éxecution des pipelines étant terminé, nous allons maintenant pouvoir vérifier le lien de notre application en staging sur Heroku:
+
+**Capture depuis la barre latérale gauche `Operate > Environments > Open`:**
+
+![5-3-staging-open-url-staging.png](../capture/5-3-staging-open-url-staging.png)
+
+**Capture de l'application:**
+
+![5-3-staging-check-url-staging.png](../capture/5-3-staging-check-url-staging.png)
+
+# Test Staging
+
+Nous avons confirmé que l'application est accessible via son URL de staging en la vérifiant manuellement. Cependant, l'objectif d'un pipeline CI/CD est d'automatiser les processus sans intervention manuelle. C'est pourquoi cette étape est incluse, afin d'automatiser la vérification et la validation.
+
+1. Après avoir ajouté cette section dans le fichier .gitlab-ci.yml, push des modifications vers le repo distant et le pipeline s'est lancé automatiquement avec maintenant cinq stages, mais cette fois-ci, j'ai mis un paramètre `only on staging` pour que le pipeline ne se lance que si on fait un push vers la branche `staging`. 
+
+**Capture du pipeline:**
+
+![6-1-test-stagine-pipeline.png](../capture/6-1-test-stagine-pipeline.png)
+
+**Capture du détails du pipeline:**
+
+![6-1-test-stagine-pipeline-details.png](../capture/6-1-test-stagine-pipeline-details.png)
+
+2. Le pipeline s'est terminé avec succès et on peut maintenant confirmé que l'URL a bien été vérifié et l'application est bien fonctionnel
+
+![6-2-test-stagine-console.png](../capture/6-2-test-stagine-console.png)
+
+# Deploy review
+
+
+
+
+
