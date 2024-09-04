@@ -24,7 +24,7 @@ Le pipeline se déclenchera à chaque push de code vers le dépôt GitLab, garan
 
 Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
-1. **La phase de Build :** consistera à la compilation du code source et construction des artefacts nécessaires pour le déploiement.
+1. **La phase de Build :** consistera à la compilation du code source et construction des artéfacts nécessaires pour le déploiement.
 
 2. **La phase de Test de l'artifact (Test d'acceptation) :** sera la partie où nous allons tester et confirmer que l'artéfact précédement créé est bien fonctionnel.
 
@@ -40,9 +40,10 @@ Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
 Donc le pipeline sera composé de:
 
-+ **Le dossier webapp :** va contenir les fichiers du code source de l'application.
-+ **Le fichier .gitlab-ci.yml :** où nous allons décrire toutes les étapes du pipeline CI/CD.
++ **Le fichier .gitlab-ci.yml :** où nous allons décrire tous les étapes du pipeline CI/CD.
 + **Le fichier Dockerfile :** nous servira à créer l'image docker de notre application pour pouvoir le conteneuriser.
++ **nginx.conf :** vu qu'on va utiliser nginx comme serveur web dans le container, ce fichier sera son fichier de configuration.
++ Le code source sera télécharger depuis le repos github directement dans l'image docker: https://github.com/diranetafen/static-website-example.git
 
 # Infrastructure
 
@@ -59,28 +60,26 @@ Nous allons utiliser les technologies ci-dessous:
 
 ![plus-for-create-project](../capture/1-1-prep-env-plus.png)
 
-2. Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On aura plusieurs choix, mais étant donné que j'ai déjà téléchargé le code source sur mon ordinateur local depuis GitHub car j'ai voulu organiser mes fichiers, je vais créer un nouveau projet vièrge.
+2. Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On aura plusieurs choix mais je vais créer un nouveau projet vièrge.
 
 ![create-project](../capture/1-2-prep-env-create-project.png)
 
-3. Il faut maintenant spécifier le nom du projet et mettre le projet en public. Pour les autre options qui sont optionnelles, je vais les laisser comme tels et je clique sur `Create project`.
+3. Il faut maintenant spécifier le nom du projet et mettre le projet en public afin de pouvoir partager le projet. Pour les autre options qui sont optionnelles, je vais les laisser comme tels et je clique sur `Create project`.
 
 ![create-project-form](../capture/1-3-prep-env-create-project-form.png)
 
-4. Une fois le projet créée, nous allons copier le lien du repo via le bouton en bleu `Code` et choisir la méthode `Clone with HTTPS` en cliquant sur l'icône presse papier à côté de l'URL.
+4. Une fois le projet créée, copier le lien du repo via le bouton en bleu `Code` et choisir la méthode `Clone with HTTPS` en cliquant sur l'icône presse papier à côté de l'URL.
 
 ![clone-https](../capture/1-4-prep-env-clone-https.png)
 
-5. Et sur mon ordinateur local, je vais naviguer vers le répertoire où j'ai mis le project. 
+5. Et sur mon ordinateur local, je vais me positionner vers le répertoire où j'ai mis le project. 
 
-    + Ensuite, ajouter le repo gitlab que je viens de créer comme repo distant et son nom d'identification sera `origin` : 
+    + Ensuite, ajouter le repo gitlab nouvellement créer comme repo distant et son nom d'identification sera `origin` : 
     
     `git remote add origin https://gitlab.com/skynet17/mini-projet-gitlab.git`
 
-    + Puis, renommer la branche par défaut où je me trouve actuellement en `main`: `git branch -M main`
-    + Enfin, il est temps de pousser les fichiers du code sources vers le repo distant `origin` et sous la branche `main`: `git push -uf origin main`
-
-6. J'ai terminé de créer le fichier `Dockerfile` et `.gitlab-ci.yml` sur mon ordinateur local donc je vais maintenant pouvoir les pousser vers Gitlab sous la branche main comme suit:
+    + Puis, renommer la branche par défaut en `main`: `git branch -M main`
+    + J'ai terminé de créer le fichier `Dockerfile` et `.gitlab-ci.yml` sur mon ordinateur local donc je vais  maintenant pouvoir les pousser vers Gitlab sous la branche main comme suit:
 
     + `git add .`
     + `git commit -m "First commit"`
