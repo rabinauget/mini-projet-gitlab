@@ -208,9 +208,19 @@ Et si on regarde notre repo distant (sur Gitlab), on verra une nouvelle branche 
 
 Nous avons confirmé que l'application est accessible via son URL de staging en la vérifiant manuellement. Cependant, l'objectif d'un pipeline CI/CD est d'automatiser les processus sans intervention manuelle. C'est pourquoi cette étape est incluse, afin d'automatiser la vérification et la validation.
 
+1. Après avoir ajouté cette section dans le fichier .gitlab-ci.yml, push des modifications vers le repo distant et le pipeline s'est lancé automatiquement avec maintenant cinq stages, mais cette fois-ci, j'ai mis un paramètre `only on staging` pour que le pipeline ne se lance que si on fait un push vers la branche `staging`. 
 
+**Capture du pipeline:**
 
+![6-1-test-stagine-pipeline.png](../capture/6-1-test-stagine-pipeline.png)
 
+**Capture du détails du pipeline:**
+
+![6-1-test-stagine-pipeline-details.png](../capture/6-1-test-stagine-pipeline-details.png)
+
+2. Le pipeline s'est terminé avec succès et on peut maintenant confirmé que l'URL a bien été vérifié et l'application est bien fonctionnel
+
+![6-2-test-stagine-console.png](../capture/6-2-test-stagine-console.png)
 
 
 
