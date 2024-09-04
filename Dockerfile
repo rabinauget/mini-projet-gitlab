@@ -1,4 +1,4 @@
-FROM bullseye-20240722-slim as files
+FROM debian:bullseye-20240722-slim as files
 LABEL maintainer='rabinauget@gmail.com'
 RUN DEBIAN_FRONTEND=noninteractive apt update && apt install git -y && apt clean -y && rm -Rf /var/www/html/*
 RUN mkdir /opt/files
