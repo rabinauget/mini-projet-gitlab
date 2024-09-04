@@ -71,6 +71,12 @@ deploy staging:
     - heroku logs -n 100 --app mini-projet-gitlab-staging-aug
     - heroku container:release -a mini-projet-gitlab-staging-aug web
 
+test staging:
+  <<: *test
+  stage: Test staging
+  variables:
+    DOMAIN: https://mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com/
+
 .deploy prod:
   stage: Deploy prod
   environment:
@@ -124,12 +130,6 @@ deploy staging:
     - npm install -g heroku
     - heroku container:login
     - heroku apps:destroy -a eazytraining-auget-$CI_COMMIT_REF_NAME -c eazytraining-auget-$CI_COMMIT_REF_NAME
-
-.test staging:
-  <<: *test
-  stage: Test staging
-  variables:
-    DOMAIN: https://mini-projet-gitlab-staging-0768c7d7e9e9.herokuapp.com/
 
 .test prod:
   <<: *test
