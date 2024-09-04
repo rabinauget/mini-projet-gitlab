@@ -186,10 +186,23 @@ Et si on regarde si notre repo distant (sur Gitlab), on verra une nouvelle branc
 
 2. On peut voir que le pipeline s'est déjà lancé au push des modifications et cette fois, nous avons quatre stages qui vont se lancer l'un après l'autre.
 
+**Capture depuis pipeline:**
 
+![5-2-staging-create-branch-pipeline.png](../capture/5-2-staging-create-branch-pipeline.png)
+
+**Details du pipeline:**
+
+![5-2-staging-create-branche-pipeline-details.png](../capture/5-2-staging-create-branche-pipeline-details.png)
 
 3. L'éxecution des pipelines étant terminé, nous allons maintenant pouvoir vérifier le lien de notre application sur Heroku:
 
+**Capture depuis la barre latérale gauche `Operate > Environments > Open`:**
+
+![5-3-staging-open-url-staging.png](../capture/5-3-staging-open-url-staging.png)
+
+**Capture de l'application:**
+
+![5-3-staging-check-url-staging.png](../capture/5-3-staging-check-url-staging.png)
 
 
 
