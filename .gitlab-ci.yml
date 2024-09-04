@@ -74,6 +74,8 @@ deploy staging:
 test staging:
   <<: *test
   stage: Test staging
+  only:
+    - staging
   variables:
     DOMAIN: https://mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com/
 
