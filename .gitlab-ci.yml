@@ -103,7 +103,7 @@ deploy review:
     url: $REVIEW_ENVIRONMENT_URL
     on_stop: stop review
 
-.stop review:
+stop review:
   stage: Stop review
   variables:
     GIT_STRATEGY: none
