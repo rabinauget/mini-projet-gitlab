@@ -208,7 +208,7 @@ Et si on regarde notre repo distant (sur Gitlab), on verra une nouvelle branche 
 
 Nous avons confirmé que l'application est accessible via son URL de staging en la vérifiant manuellement. Cependant, l'objectif d'un pipeline CI/CD est d'automatiser les processus sans intervention manuelle. C'est pourquoi cette étape est incluse, afin d'automatiser la vérification et la validation.
 
-1. Après avoir ajouté cette section dans le fichier .gitlab-ci.yml, push des modifications vers le repo distant et le pipeline s'est lancé automatiquement avec maintenant cinq stages, mais cette fois-ci, j'ai mis un paramètre `only on staging` pour que le pipeline ne se lance que si on fait un push vers la branche `staging`. 
+1. Après avoir ajouté cette section dans le fichier .gitlab-ci.yml et fait un push des modifications vers le repo distant, le pipeline s'est lancé automatiquement avec maintenant cinq stages, mais cette fois-ci, j'ai mis un paramètre `only on staging` pour que le pipeline ne se lance que si on fait un push vers la branche `staging`. 
 
 **Capture du pipeline:**
 
@@ -224,7 +224,59 @@ Nous avons confirmé que l'application est accessible via son URL de staging en 
 
 # Deploy review
 
+Le test de staging nous a permis de confirmer que l'application est bien fonctionnelle et cela, sans besoin d'intervention manuelle. Maintenant, nous allons pouvoir envoyer les modifications vers la branche `main` qui est la branche de production. Mais avant cela, nous allons passer vers la phase de review qui va servir à confirmer qu'il n'y a pas de conflit de code entre la branche de staging et la branche `main`.
 
+1. J'ai ajouté les sections `deploy review & stop review` et fait un push vers le repo dispo. Le pipeline s'est lancé automatiquement mais seulement avec encore 5 cinq stages car les review ne vont se lancer que si on fait un merge request. 
 
+![7-1-review-pipeline-list.png](../capture/7-1-review-pipeline-list.png)
+
+2. Et une fois que le pipeline se termine, il y aura un bandeau en haut qui va suggérer de faire un merge étant donné que le push effectué n'était pas sur la branche principale. 
+
+![7-2-review-bandeau-merge.png](../capture/7-2-review-bandeau-merge.png)
+
+3. Mais on peut aussi créer le merge request depuis la barre latérale gauche puis dans `Code > Merge requests` puis `New merge request`.
+
+**Capture du création merge request interface 1:**
+
+![7-3-1-review-merge-request-form.png](../capture/7-3-1-review-merge-request-form.png)
+
+**Capture du création merge request interface 2:**
+
+![7-3-2-review-merge-request-form1.png](../capture/7-3-2-review-merge-request-form1.png)
+
+4. On est ensuite redirigé vers cette interface pour remplir les différents champs afin de paramétrer le comporetement du merge request. Et si on a préféré cliquer sur le bandeau, on aura été redirigé vers cette interface également. Mais surtout, on ne va pas oublié de décocher l'option ci-dessous afin de ne pas supprimer la branche staging étant donné qu'elle nous servira encore. 
+
+**Capture tête du formulaire:**
+
+![7-4-1-review-merge-request-form2.png](../capture/7-4-review-merge-request-form2.png)
+
+**Capture du pied du formulaire:**
+
+![7-4-2-review-merge-request-form-delete.png](../capture/7-4-review-merge-request-form-delete.png)
+
+5. Une fois qu'on a cliqué sur `create merge resquest`, on est redirigé vers la page ci-dessous qui va nous indiqué que le merge s'est bien lancé. On peut cliquer sur la référence du merge pour avoir les détails du pipeline.
+
+![7-5-review-merge-request-launched.png](../capture/7-5-review-merge-request-launched.png)
+
+6. Après avoir cliqué sur la référence du pipeline, on est redirigé vers la page qui affiche les détails du pipeline et on verra qu'il n'y a que deux pipeline. Car dans notre fichier `.gitlab-ci.yml`, on a dit que les deux pipelines seront lancés lors d'un merge request:
+
+    + `deploy review`: pour faire la création du projet dans un environnement conteneuriser et faire le test de l'application;
+    + `stop review`: pour supprimer l'environnement une fois le test terminer car sinon, ça va occuper notre espace sur Heroku pour en. Mais on peut voir les icônes play et stop sur le job stop deploy car dans notre fichier `.gitlab-ci.yml`, nous avons spécifié que ce job sera lancé manuellement, donc cela nous laisse le temps de vérifier et confirmer que l'application est bien accessible avec de valider la suppression de l'environnement de review. Et on peut également arrêter le job si on veut.
+
+![7-6-merge-request-pipeline-details.png](../capture/7-6-merge-request-pipeline-details.png)
+
+7. Avant de supprimer l'environnement de review si le deploy review s'est terminé sans erreur, on peut aller dans `Operate > Environments`, puis on identifie notre job, et on clique sur open pour accéder à l'application.
+
+**Capture environnement:**
+
+![7-7-merge-request-environment-open.png](../capture/7-7-merge-request-environment-open.png)
+
+**Capture vérification application:**
+
+![7-7-merge-request-url-open.png](../capture/7-7-merge-request-url-open.png)
+
+8. Comme les pipelines précédents, on peut cliquer sur le job pour accéder à la console d'évènement. Et on verra que le job s'est bien terminé avec succès. 
+
+![8-merge-request-console-stop-review.png](../capture/8-merge-request-console-stop-review.png)
 
 
