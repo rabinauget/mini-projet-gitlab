@@ -119,23 +119,23 @@ stop review:
     - heroku container:login
     - heroku apps:destroy -a mini-projet-gitlab-$CI_COMMIT_REF_NAME -c mini-projet-gitlab-$CI_COMMIT_REF_NAME
 
-.deploy prod:
+deploy prod:
   stage: Deploy prod
   environment:
     name: prod
-    url: https://eazytraining-prod-auget-fb966a39c4c4.herokuapp.com/
+    url: https://mini-projet-gitlab-prod-aug-91895f21d71e.herokuapp.com/
   only:
-    - master
+    - main
   script:
     - apk --no-cache add npm
     - npm i -g heroku@7.68.0
     - heroku container:login
-    - heroku create eazytraining-prod-auget  || echo "project already exist"
-    - heroku container:push -a eazytraining-prod-auget web
-    - heroku container:release -a eazytraining-prod-auget web
+    - heroku create mini-projet-gitlab-prod-aug  || echo "project already exist"
+    - heroku container:push -a mini-projet-gitlab-prod-aug web
+    - heroku container:release -a mini-projet-gitlab-prod-aug web
 
 .test prod:
   <<: *test
   stage: Test prod
   variables:
-    DOMAIN: eazytraining-prod-auget-fb966a39c4c4.herokuapp.com
+    DOMAIN: mini-projet-gitlab-prod-aug-91895f21d71e.herokuapp.com
