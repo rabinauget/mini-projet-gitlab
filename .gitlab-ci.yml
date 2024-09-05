@@ -134,7 +134,7 @@ deploy prod:
     - heroku container:push -a mini-projet-gitlab-prod-aug web
     - heroku container:release -a mini-projet-gitlab-prod-aug web
 
-.test prod:
+test prod:
   <<: *test
   stage: Test prod
   variables:
