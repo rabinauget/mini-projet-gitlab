@@ -21,7 +21,7 @@ stages:
 .test_template: &test
   image: alpine
   only:
-    - master
+    - main
   script:
     - apk --no-cache add curl
     - echo $DOMAIN
