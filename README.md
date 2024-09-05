@@ -16,7 +16,7 @@ Ce mini projet est dans le cadre du bootcamp Devops de Eazytraing
 
 # Contexte du projet
 
-Ce projet vise à implémenter un pipeline CI/CD (Intégration Continue et Déploiement Continu) pour automatiser et optimiser le processus de livraison et de déploiement d'une application. Réduisant ainsi les erreurs manuelles, accélérant les mises à jour, et garantissant une intégration fluide et cohérente à chaque étape. Et surtout, cela renforcera la collaboration entre les équipes de développement et d'opérations.
+Ce projet vise à implémenter un pipeline CI/CD (Intégration Continue et Déploiement Continu) pour automatiser et optimiser le processus de livraison et de déploiement d'une application. Réduisant ainsi les erreurs manuelles, accélérant les mises à jour, et garantissant une intégration fluide et cohérente à chaque étape.
 
 Le pipeline se déclenchera à chaque push de code vers le dépôt GitLab, garantissant que les nouvelles modifications sont automatiquement compilées, testées, intégrées, puis déployées sur les serveurs de Test (Staging) et de Production.
 
@@ -34,7 +34,7 @@ Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
 5. **La phase de révision (Deploy Review) :** Une fois confirmée qu'il n'y a pas de problème dans la chaîne, l'application doit être déployée en production. Cependant, avant cela, elle passera par une phase de révision pour s'assurer que l'application est bien fonctionnelle et accessible.
 
-6. **La phase de déploimeent sur le serveur Prod :** L'application, ayant été confirmée comme fonctionnelle à toutes les étapes, peut maintenant être déployée sur l'environnement de production pour être utilisée par les clients.
+6. **La phase de déploimnt sur le serveur Prod :** L'application, ayant été confirmée comme fonctionnelle à toutes les étapes, peut maintenant être déployée sur l'environnement de production pour être utilisée par les clients.
 
 # Application
 
@@ -279,4 +279,34 @@ Le test de staging nous a permis de confirmer que l'application est bien fonctio
 
 ![8-merge-request-console-stop-review.png](../capture/8-merge-request-console-stop-review.png)
 
+# Deploy Prod et Test Deploy
 
+1. Maintenant que les review ont bien été confirmé, on peut merger les modifications vers la prod. Et pour ce faire, on va dans la page du merge request. Et une fois qu'on clique sur le bouton `Merge`, on verra que le pipeline de merge est en cours d'éxecution avec cinq pipeline. Etant donné qu'on a déjà vu `deploy staging` et `Test staging`, j'ai directement ajouté les sections `deploy prod` et `Test prod` car on comprend déjà comment elles fonctionnent.
+
+**Capture avant clique sur `Merge`:**
+
+![8-1-deploy-prod-merge-request.png](../capture/8-1-deploy-prod-merge-request.png)
+
+**Capture après clique sur `Merge`:**
+
+![8-1-1-deploy-prod-merge-request.png](../capture/8-1-1-deploy-prod-merge-request.png)
+
+2. Comme d'habitude, on clique sur la référence du pipeline pour avoir les détails et on verra qu'après le release, c'est directement le déploiement vers la prod car celui de staging est juste concernant la branche staging.
+
+![8-1-deploy-prod-pipeline-details.png](../capture/8-1-deploy-prod-pipeline-details.png)
+
+3. Après quelques minutes de patience (qui est une vertue :) ), on constate que le job de `Test prod` est bien en succès.
+
+![8-3-deploy-prod-console-test-prod.png](../capture/8-3-deploy-prod-console-test-prod.png)
+
+4. Pour confirmer que le pipeline s'est bien terminé avec succès et que l'application est bien fonctionnelle sur l'environnement de production, on va le vérifier dans `Operate > Environments`, puis `open`.
+
+![8-4-deploy-prod-open-url.png](../capture/8-4-deploy-prod-open-url.png)
+
+5. On sera donc redirigé vers l'URL de l'application qui nous confirmera que tout est bien qui fini bien.
+
+![8-4-deploy-prod-open-app.png](../capture/8-4-deploy-prod-open-app.png)
+
+# Conclusion
+
+En résumé, ce projet de pipeline CI/CD sur GitLab a efficacement résolu les problématiques liées à la gestion manuelle des déploiements. En automatisant les processus de build, de test et de déploiement, nous avons non seulement réduit les risques d'erreurs humaines et amélioré la cohérence entre les environnements. Ce pipeline assure une livraison fluide et fiable des applications, garantissant ainsi une qualité constante du produit final.
