@@ -248,11 +248,11 @@ Le test de staging nous a permis de confirmer que l'application est bien fonctio
 
 **Capture tête du formulaire:**
 
-![7-4-1-review-merge-request-form2.png](../capture/7-4-review-merge-request-form2.png)
+![7-4-1-review-merge-request-form2.png](../capture/7-4-1-review-merge-request-form2.png)
 
 **Capture du pied du formulaire:**
 
-![7-4-2-review-merge-request-form-delete.png](../capture/7-4-review-merge-request-form-delete.png)
+![7-4-2-review-merge-request-form-delete.png](../capture/7-4-2-review-merge-request-form-delete.png)
 
 5. Une fois qu'on a cliqué sur `create merge resquest`, on est redirigé vers la page ci-dessous qui va nous indiqué que le merge s'est bien lancé. On peut cliquer sur la référence du merge pour avoir les détails du pipeline.
 
