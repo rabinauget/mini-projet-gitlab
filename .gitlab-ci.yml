@@ -117,7 +117,7 @@ stop review:
     - apk --no-cache add npm
     - npm i -g heroku@7.68.0
     - heroku container:login
-    - heroku apps:destroy -a eazytraining-auget-$CI_COMMIT_REF_NAME -c eazytraining-auget-$CI_COMMIT_REF_NAME
+    - heroku apps:destroy -a mini-projet-gitlab-$CI_COMMIT_REF_NAME -c mini-projet-gitlab-$CI_COMMIT_REF_NAME
 
 .deploy prod:
   stage: Deploy prod
