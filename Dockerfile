@@ -1,6 +1,6 @@
 FROM debian:bullseye-20240722-slim as files
 LABEL maintainer='rabinauget@gmail.com'
-RUN DEBIAN_FRONTEND=noninteractive apt update && apt install git -y && apt clean -y && rm -Rf /var/www/html/*
+RUN DEBIAN_FRONTEND=noninteractive apt update && apt install git -y && apt clean -y && rm -Rf /var/lib/apt/lists/*
 RUN mkdir /opt/files
 RUN git clone https://github.com/diranetafen/static-website-example.git /opt/files/
 
