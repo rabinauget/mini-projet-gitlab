@@ -180,11 +180,21 @@ Pour ce faire, nous allons utiliser les commandes ci-dessous:
     + `git commit -m "add branch review"`: pour mettre une petite note sur l'action
     + `git push -u origin review`: pour pousser les modifications vers le repo distant
 
-Le release étant effectué, nous allons maintenant pouvoir ajouter la section `review` afin de faire un merge request vers la branch de staging (créé avec les mêmes commandes que ci-dessus).
+Le release étant effectué durant la précédente étape, nous allons maintenant pouvoir ajouter la section `review` dans le fichier `.gitlab-ci.yml` afin de faire un merge request vers la branch de staging (créé avec les mêmes commandes que ci-dessus).
 
-1. J'ai ajouté les sections `deploy review & stop review` et fait un push vers le repo dispo. Le pipeline s'est lancé automatiquement mais seulement avec encore 5 cinq stages car les review ne vont se lancer que si on fait un merge request. 
+Et si on regarde notre repo distant (sur Gitlab), on verra une nouvelle branche au nom de `review` et `staging` et nous aurions également tous les fichiers qui étaient dans la branche `main`:
+
+![5-1-staging-create-branch.png](../capture/5-1-staging-create-branch.png)
+
+1. J'ai ajouté les sections `deploy review & stop review` et fait un push vers le repo distant. Le pipeline s'est lancé automatiquement mais seulement avec encore 3 stages car si on regarde bien les dans notre fichier de pipeline, on verra l'instruction `only: merge_requests`, donc les pipelines de review ne se lanceront que lors d'un merge.
+
+**Capture pipeline list**
 
 ![7-1-review-pipeline-list.png](../capture/7-1-review-pipeline-list.png)
+
+**Capture pipeline details**
+
+![7-1-review-pipeline-details.png](../capture/7-1-review-pipeline-details.png)
 
 2. Et une fois que le pipeline se termine, il y aura un bandeau en haut qui va suggérer de faire un merge étant donné que le push effectué n'était pas sur la branche principale. 
 
@@ -237,20 +247,9 @@ Le release étant effectué, nous allons maintenant pouvoir ajouter la section `
 
 # Deploy staging
 
-1. Maintenant, nous allons d'abord deployer l'application sur un environnement de staging puis une fois validée qu'il n'y a pas de souci, nous allons déployer sur l'environnement de prod. Mais avant cela, nous allons créer une nouvelle branche `staging`. Nous verrons par la suite comment faire pour déployer sur la prod avec la branche `main` à l'aide d'un `merge request`.
+1. Maintenant, nous allons d'abord deployer l'application sur un environnement de preproduction (staging) puis une fois validée qu'il n'y a pas de souci, nous allons déployer sur l'environnement de production.
 
-Pour cela, nous allons utiliser les commandes ci-dessous:
-
-    + `git -checkout -b staging`: pour créer la branche et dont le nom sera `staging`
-    + `git add .`: pour valider la modification
-    + `git commit -m "add branch staging"`: pour mettre une petitie note sur l'action
-    + `git push -u origin staging`: pour pousser les modifications vers le repo distant
-
-Et si on regarde notre repo distant (sur Gitlab), on verra une nouvelle branche au nom de `staging` et nous aurions également tous les fichiers qui étaient dans la branche `main`:
-
-![5-1-staging-create-branch.png](../capture/5-1-staging-create-branch.png)
-
-2. On peut voir que le pipeline s'est déjà lancé au push des modifications et cette fois, nous avons quatre stages qui vont se lancer l'un après l'autre.
+2. Après avoir ajouté la section `deploy staging` dans le fichier de pipeline `.gitlab-ci.yml` et fait un push vers le repo distant, on peut voir que le pipeline s'est déjà lancé et cette fois, nous avons quatre stages qui vont se lancer l'un après l'autre (oui, seulement quatres car comme on vient juste de le voir, les review ne vont se lancer que lorsqu'on effectue un merge request).
 
 **Capture depuis pipeline:**
 
@@ -290,7 +289,9 @@ Nous avons confirmé que l'application est accessible via son URL de staging en 
 
 # Deploy Prod et Test Deploy
 
-1. Maintenant que les review ont bien été confirmé, on peut merger les modifications vers la prod. Et pour ce faire, on va dans la page du merge request. Et une fois qu'on clique sur le bouton `Merge`, on verra que le pipeline de merge est en cours d'éxecution avec cinq pipeline. Etant donné qu'on a déjà vu `deploy staging` et `Test staging`, j'ai directement ajouté les sections `deploy prod` et `Test prod` car on comprend déjà comment elles fonctionnent.
+Nous venons de confirmer via la phase de review et la phase de déploiement en staging que l'application et le pipeline sont sans erreur, il faut donc maintenant merger les codes depuis la branche de staging vers la branche main pour que le déploiement vers l'environnement de prod soit effectif (Même étage que le merge de tout à l'heure). 
+
+1. Et pour ce faire, on va dans la page du merge request. Et une fois qu'on clique sur le bouton `Merge`, on verra que le pipeline de merge est en cours d'éxecution avec cinq pipeline. Etant donné qu'on a déjà vu `deploy staging` et `Test staging`, j'ai directement ajouté les sections `deploy prod` et `Test prod` car on comprend déjà comment elles fonctionnent.
 
 **Capture avant clique sur `Merge`:**
 
