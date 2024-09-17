@@ -30,11 +30,11 @@ Le pipeline CI/CD sera structuré en plusieurs étapes clés:
 
 3. **La phase de sauvegarde de l'image (Release image) :** Après avoir confirmer que l'artéfact est fonctionnel, nous allons le sauvegarder afin de pouvoir le déployer sur les serveurs tests/prod ou le réutiliser ultérieurement.
 
-4. **La phase de déploiement sur le serveur Test ( Deploy staging) :** Cette étape concerne le déploiement sur le serveur de test. Si des erreurs surviennent dans la chaîne de déploiement, elles seront détectées avant le déploiement sur le serveur de production. Mais on pourra également en profiter pour effectuer des tests sur les fonctionnalités de l'application.
+4. **La phase de révision (Deploy Review & Stop review) :** Une fois confirmée qu'il n'y a pas de problème dans la chaîne, l'application doit être déployée en production. Cependant, avant cela, elle passera par une phase de révision pour s'assurer que l'application est bien fonctionnelle et accessible.
 
-5. **La phase de révision (Deploy Review) :** Une fois confirmée qu'il n'y a pas de problème dans la chaîne, l'application doit être déployée en production. Cependant, avant cela, elle passera par une phase de révision pour s'assurer que l'application est bien fonctionnelle et accessible.
+5. **La phase de déploiement sur le serveur de preproduction (Deploy staging & Test Staging) :** Cette étape concerne le déploiement sur le serveur de test. Si des erreurs surviennent dans la chaîne de déploiement, elles seront détectées avant le déploiement sur le serveur de production. Mais on pourra également en profiter pour effectuer des tests sur les fonctionnalités de l'application.
 
-6. **La phase de déploimnt sur le serveur Prod :** L'application, ayant été confirmée comme fonctionnelle à toutes les étapes, peut maintenant être déployée sur l'environnement de production pour être utilisée par les clients.
+6. **La phase de déploiment sur le serveur de production (Deploy prod & Test prod):** L'application, ayant été confirmée comme fonctionnelle à toutes les étapes, peut maintenant être déployée sur l'environnement de production pour être utilisée par les clients.
 
 # Application
 
@@ -169,66 +169,32 @@ Nous avons validé le bon fonctionnement de l'image. Maintenant, nous allons la 
 
 ![4-3-release-image-job-stage.png](../capture/4-3-release-image-job-stage.png)
 
-# Deploy staging
+# Deploy review & Stop review
 
-1. Maintenant, nous allons d'abord deployer l'application sur un environnement de staging puis une fois validée qu'il n'y a pas de souci, nous allons déployer sur l'environnement de prod. Mais avant cela, nous allons créer une nouvelle branche `staging`. Nous verrons par la suite comment faire pour déployer sur la prod avec la branche `main` à l'aide d'un `merge request`.
+Afin de faire le test de review, nous allons créer une branche `review` pour que nous puissions faire un merge vers la branche de `staging`. 
 
-Pour cela, nous allons utiliser les commandes ci-dessous:
+Pour ce faire, nous allons utiliser les commandes ci-dessous:
 
-    + `git -checkout -b staging`: pour créer la branche et dont le nom sera `staging`
+    + `git checkout -b review`: pour créer la branche et dont le nom sera `review`
     + `git add .`: pour valider la modification
-    + `git commit -m "add branch staging"`: pour mettre une petitie note sur l'action
-    + `git push -u origin staging`: pour pousser les modifications vers le repo distant
+    + `git commit -m "add branch review"`: pour mettre une petite note sur l'action
+    + `git push -u origin review`: pour pousser les modifications vers le repo distant
 
-Et si on regarde notre repo distant (sur Gitlab), on verra une nouvelle branche au nom de `staging` et nous aurions également tous les fichiers qui étaient dans la branche `main`:
+Le release étant effectué durant la précédente étape, nous allons maintenant pouvoir ajouter la section `review` dans le fichier `.gitlab-ci.yml` afin de faire un merge request vers la branch de staging (créé avec les mêmes commandes que ci-dessus).
+
+Et si on regarde notre repo distant (sur Gitlab), on verra une nouvelle branche au nom de `review` et `staging` et nous aurions également tous les fichiers qui étaient dans la branche `main`:
 
 ![5-1-staging-create-branch.png](../capture/5-1-staging-create-branch.png)
 
-2. On peut voir que le pipeline s'est déjà lancé au push des modifications et cette fois, nous avons quatre stages qui vont se lancer l'un après l'autre.
+1. J'ai ajouté les sections `deploy review & stop review` et fait un push vers le repo distant. Le pipeline s'est lancé automatiquement mais seulement avec encore 3 stages car si on regarde bien les dans notre fichier de pipeline, on verra l'instruction `only: merge_requests`, donc les pipelines de review ne se lanceront que lors d'un merge.
 
-**Capture depuis pipeline:**
-
-![5-2-staging-create-branch-pipeline.png](../capture/5-2-staging-create-branch-pipeline.png)
-
-**Details du pipeline:**
-
-![5-2-staging-create-branche-pipeline-details.png](../capture/5-2-staging-create-branche-pipeline-details.png)
-
-3. L'éxecution des pipelines étant terminé, nous allons maintenant pouvoir vérifier le lien de notre application en staging sur Heroku:
-
-**Capture depuis la barre latérale gauche `Operate > Environments > Open`:**
-
-![5-3-staging-open-url-staging.png](../capture/5-3-staging-open-url-staging.png)
-
-**Capture de l'application:**
-
-![5-3-staging-check-url-staging.png](../capture/5-3-staging-check-url-staging.png)
-
-# Test Staging
-
-Nous avons confirmé que l'application est accessible via son URL de staging en la vérifiant manuellement. Cependant, l'objectif d'un pipeline CI/CD est d'automatiser les processus sans intervention manuelle. C'est pourquoi cette étape est incluse, afin d'automatiser la vérification et la validation.
-
-1. Après avoir ajouté cette section dans le fichier .gitlab-ci.yml et fait un push des modifications vers le repo distant, le pipeline s'est lancé automatiquement avec maintenant cinq stages, mais cette fois-ci, j'ai mis un paramètre `only on staging` pour que le pipeline ne se lance que si on fait un push vers la branche `staging`. 
-
-**Capture du pipeline:**
-
-![6-1-test-stagine-pipeline.png](../capture/6-1-test-stagine-pipeline.png)
-
-**Capture du détails du pipeline:**
-
-![6-1-test-stagine-pipeline-details.png](../capture/6-1-test-stagine-pipeline-details.png)
-
-2. Le pipeline s'est terminé avec succès et on peut maintenant confirmé que l'URL a bien été vérifié et l'application est bien fonctionnel
-
-![6-2-test-stagine-console.png](../capture/6-2-test-stagine-console.png)
-
-# Deploy review
-
-Le test de staging nous a permis de confirmer que l'application est bien fonctionnelle et cela, sans besoin d'intervention manuelle. Maintenant, nous allons pouvoir envoyer les modifications vers la branche `main` qui est la branche de production. Mais avant cela, nous allons passer vers la phase de review qui va servir à confirmer qu'il n'y a pas de conflit de code entre la branche de staging et la branche `main`.
-
-1. J'ai ajouté les sections `deploy review & stop review` et fait un push vers le repo dispo. Le pipeline s'est lancé automatiquement mais seulement avec encore 5 cinq stages car les review ne vont se lancer que si on fait un merge request. 
+**Capture pipeline list**
 
 ![7-1-review-pipeline-list.png](../capture/7-1-review-pipeline-list.png)
+
+**Capture pipeline details**
+
+![7-1-review-pipeline-details.png](../capture/7-1-review-pipeline-details.png)
 
 2. Et une fois que le pipeline se termine, il y aura un bandeau en haut qui va suggérer de faire un merge étant donné que le push effectué n'était pas sur la branche principale. 
 
@@ -279,9 +245,53 @@ Le test de staging nous a permis de confirmer que l'application est bien fonctio
 
 ![8-merge-request-console-stop-review.png](../capture/8-merge-request-console-stop-review.png)
 
+# Deploy staging
+
+1. Maintenant, nous allons d'abord deployer l'application sur un environnement de preproduction (staging) puis une fois validée qu'il n'y a pas de souci, nous allons déployer sur l'environnement de production.
+
+2. Après avoir ajouté la section `deploy staging` dans le fichier de pipeline `.gitlab-ci.yml` et fait un push vers le repo distant, on peut voir que le pipeline s'est déjà lancé et cette fois, nous avons quatre stages qui vont se lancer l'un après l'autre (oui, seulement quatres car comme on vient juste de le voir, les review ne vont se lancer que lorsqu'on effectue un merge request).
+
+**Capture depuis pipeline:**
+
+![5-2-staging-create-branch-pipeline.png](../capture/5-2-staging-create-branch-pipeline.png)
+
+**Details du pipeline:**
+
+![5-2-staging-create-branche-pipeline-details.png](../capture/5-2-staging-create-branche-pipeline-details.png)
+
+3. L'éxecution des pipelines étant terminé, nous allons maintenant pouvoir vérifier le lien de notre application en staging sur Heroku:
+
+**Capture depuis la barre latérale gauche `Operate > Environments > Open`:**
+
+![5-3-staging-open-url-staging.png](../capture/5-3-staging-open-url-staging.png)
+
+**Capture de l'application:**
+
+![5-3-staging-check-url-staging.png](../capture/5-3-staging-check-url-staging.png)
+
+# Test Staging
+
+Nous avons confirmé que l'application est accessible via son URL de staging en la vérifiant manuellement. Cependant, l'objectif d'un pipeline CI/CD est d'automatiser les processus sans intervention manuelle. C'est pourquoi cette étape est incluse, afin d'automatiser la vérification et la validation.
+
+1. Après avoir ajouté cette section dans le fichier .gitlab-ci.yml et fait un push des modifications vers le repo distant, le pipeline s'est lancé automatiquement avec maintenant cinq stages, mais cette fois-ci, j'ai mis un paramètre `only on staging` pour que le pipeline ne se lance que si on fait un push vers la branche `staging`. 
+
+**Capture du pipeline:**
+
+![6-1-test-stagine-pipeline.png](../capture/6-1-test-stagine-pipeline.png)
+
+**Capture du détails du pipeline:**
+
+![6-1-test-stagine-pipeline-details.png](../capture/6-1-test-stagine-pipeline-details.png)
+
+2. Le pipeline s'est terminé avec succès et on peut maintenant confirmé que l'URL a bien été vérifié et l'application est bien fonctionnel
+
+![6-2-test-stagine-console.png](../capture/6-2-test-stagine-console.png)
+
 # Deploy Prod et Test Deploy
 
-1. Maintenant que les review ont bien été confirmé, on peut merger les modifications vers la prod. Et pour ce faire, on va dans la page du merge request. Et une fois qu'on clique sur le bouton `Merge`, on verra que le pipeline de merge est en cours d'éxecution avec cinq pipeline. Etant donné qu'on a déjà vu `deploy staging` et `Test staging`, j'ai directement ajouté les sections `deploy prod` et `Test prod` car on comprend déjà comment elles fonctionnent.
+Nous venons de confirmer via la phase de review et la phase de déploiement en staging que l'application et le pipeline sont sans erreur, il faut donc maintenant merger les codes depuis la branche de staging vers la branche main pour que le déploiement vers l'environnement de prod soit effectif (Même étage que le merge de tout à l'heure). 
+
+1. Et pour ce faire, on va dans la page du merge request. Et une fois qu'on clique sur le bouton `Merge`, on verra que le pipeline de merge est en cours d'éxecution avec cinq pipeline. Etant donné qu'on a déjà vu `deploy staging` et `Test staging`, j'ai directement ajouté les sections `deploy prod` et `Test prod` car on comprend déjà comment elles fonctionnent.
 
 **Capture avant clique sur `Merge`:**
 
