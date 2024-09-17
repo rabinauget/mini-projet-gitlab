@@ -319,4 +319,4 @@ Nous venons de confirmer via la phase de review et la phase de déploiement en s
 
 # Conclusion
 
-En résumé, ce projet de pipeline CI/CD sur GitLab a efficacement résolu les problématiques liées à la gestion manuelle des déploiements. En automatisant les processus de build, de test et de déploiement, nous avons non seulement réduit les risques d'erreurs humaines et amélioré la cohérence entre les environnements. Ce pipeline assure une livraison fluide et fiable des applications, garantissant ainsi une qualité constante du produit final.
+En résumé, ce projet de pipeline CI/CD sur GitLab a efficacement résolu les problématiques liées à la gestion manuelle des déploiements. En automatisant les processus de build, de test et de déploiement, nous avons non seulement réduit les risques d'erreurs humaines mais aussi amélioré la cohérence entre les environnements. Ce pipeline assure une livraison fluide et fiable des applications, garantissant ainsi une qualité constante du produit final.
