@@ -11,10 +11,10 @@ stages:
   - Build
   - Test acceptation
   - Release image
-  - Deploy staging
-  - Test staging
   - Deploy review
   - Stop review
+  - Deploy staging
+  - Test staging
   - Deploy prod
   - Test prod
 
@@ -56,30 +56,6 @@ release image:
     - docker push "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
     - docker push "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
 
-deploy staging:
-  stage: Deploy staging
-  environment:
-    name: staging
-    url: https://mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com/
-  only:
-    - staging
-  script:
-    - apk --no-cache add npm
-    - npm i -g heroku@7.68.0
-    - heroku container:login
-    - heroku create mini-projet-gitlab-staging-aug || echo "project already exist"
-    - heroku container:push -a mini-projet-gitlab-staging-aug web
-    - heroku logs -n 100 --app mini-projet-gitlab-staging-aug
-    - heroku container:release -a mini-projet-gitlab-staging-aug web
-
-test staging:
-  <<: *test
-  stage: Test staging
-  only:
-    - staging
-  variables:
-    DOMAIN: mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com
-
 deploy review:
   stage: Deploy review
   only:
@@ -118,6 +94,30 @@ stop review:
     - npm i -g heroku@7.68.0
     - heroku container:login
     - heroku apps:destroy -a mini-projet-gitlab-$CI_COMMIT_REF_NAME -c mini-projet-gitlab-$CI_COMMIT_REF_NAME
+
+deploy staging:
+  stage: Deploy staging
+  environment:
+    name: staging
+    url: https://mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com/
+  only:
+    - staging
+  script:
+    - apk --no-cache add npm
+    - npm i -g heroku@7.68.0
+    - heroku container:login
+    - heroku create mini-projet-gitlab-staging-aug || echo "project already exist"
+    - heroku container:push -a mini-projet-gitlab-staging-aug web
+    - heroku logs -n 100 --app mini-projet-gitlab-staging-aug
+    - heroku container:release -a mini-projet-gitlab-staging-aug web
+
+test staging:
+  <<: *test
+  stage: Test staging
+  only:
+    - staging
+  variables:
+    DOMAIN: mini-projet-gitlab-staging-aug-4cf9ddbae0fe.herokuapp.com
 
 deploy prod:
   stage: Deploy prod
