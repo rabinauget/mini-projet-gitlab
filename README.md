@@ -14,6 +14,8 @@ Ce mini projet est dans le cadre du bootcamp Devops de Eazytraing
 
 **LinkedIn** : www.linkedin.com/in/auget-rabina-61663314a
 
+**Lien du projet sur Gitlab:** https://gitlab.com/skynet17/mini-projet-gitlab.git
+
 # Contexte du projet
 
 Ce projet vise à implémenter un pipeline CI/CD (Intégration Continue et Déploiement Continu) pour automatiser et optimiser le processus de livraison et de déploiement d'une application. Réduisant ainsi les erreurs manuelles, accélérant les mises à jour, et garantissant une intégration fluide et cohérente à chaque étape.
@@ -58,7 +60,7 @@ Nous allons utiliser les technologies ci-dessous:
 
 1. Pour commencer, nous allons créer un projet/repository sur Gitlab avec le +:
 
-![plus-for-create-project](../capture/1-1-prep-env-plus.png)
+![plus-for-create-project](./capture/1-1-prep-env-plus.png)
 
 2. Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On aura plusieurs choix mais je vais créer un nouveau projet vièrge.
 
