@@ -64,15 +64,15 @@ Nous allons utiliser les technologies ci-dessous:
 
 2. Nous allons maintenant être rediriger vers l'interface de création du nouveau projet. On aura plusieurs choix mais je vais créer un nouveau projet vièrge.
 
-![create-project](../capture/1-2-prep-env-create-project.png)
+![create-project](./capture/1-2-prep-env-create-project.png)
 
 3. Il faut maintenant spécifier le nom du projet et mettre le projet en public afin de pouvoir partager le projet. Pour les autre options qui sont optionnelles, je vais les laisser comme tels et je clique sur `Create project`.
 
-![create-project-form](../capture/1-3-prep-env-create-project-form.png)
+![create-project-form](./capture/1-3-prep-env-create-project-form.png)
 
 4. Une fois le projet créée, copier le lien du repo via le bouton en bleu `Code` et choisir la méthode `Clone with HTTPS` en cliquant sur l'icône presse papier à côté de l'URL.
 
-![clone-https](../capture/1-4-prep-env-clone-https.png)
+![clone-https](./capture/1-4-prep-env-clone-https.png)
 
 5. Et sur mon ordinateur local, je vais me positionner vers le répertoire où j'ai mis le project. 
 
@@ -91,42 +91,42 @@ Nous allons utiliser les technologies ci-dessous:
 
 1. Après avoir terminer le push des fichiers, on peut remarquer cet icône qui nous indique qu'un pipeline est en cours d'execution. Il s'est lancé automatiquement après l'action push. Mais on verra par la suite comment le déclencher après un évènement spécifique.
 
-![pipeline-running](../capture/2-1-phase-build-pipeline-running.png)
+![pipeline-running](./capture/2-1-phase-build-pipeline-running.png)
 
 2. Si on patiente un peu, cet icône va passer en vert pour nous indiquer que le pipeline s'est bien déroulé avec succès. Mais on peut aussi aller dans la barre latérale gauche dans `Build` > `Pipeline` pour voir la liste de tous les pipelines en cours ou ceux qui sont déjà terminé. Comme notre fichier `.gitlab-ci.yml` ne contient pour l'instant que la partie `docker-build`, il n'y a qu'un seul stage sur la partie `Stages`. On peut cliquer sur l'icône en vert pour voir quelle partie des jobs déclarés dans le fichier sont en cours d'execution.
 
-![2-2-phase-build-pipeline-list-state.png](../capture/2-2-phase-build-pipeline-list-state.png)
+![2-2-phase-build-pipeline-list-state.png](./capture/2-2-phase-build-pipeline-list-state.png)
 
 3. Si on clique sur `docker-build`, on sera redirigé vers la console qui où nous pourrions voir tous les étapes du build: Depuis la génération du container Dind jusqu'au statut finale `succeeded`, nous indiquant que le job s'est terminé sans erreur. S'il y a erreur, on verra un `failed` en rouge.
 
-![2-3-phase-build-job-succeeded.png](../capture/2-3-phase-build-job-succeeded.png)
+![2-3-phase-build-job-succeeded.png](./capture/2-3-phase-build-job-succeeded.png)
 
 4. **Sur GitLab, à chaque job, un conteneur est créé puis supprimé une fois le job terminé.** C'est pourquoi, dans notre fichier de pipeline `gitlab-ci.yml`, nous sauvegardons l'image Docker sous forme d'artéfact pour qu'il soit disponible pour les jobs suivants. On peut vérifier que l'artéfact a bien été sauvegardé dans `Build` > `Artifact` et la référence du commit de l'artfifact correspond bien à la référence du commit de notre pipeline `2ef8da8b`. Ou bien depuis la liste des pipelines, on peut aussi cliquer sur l'icône de téléchargement pour voir la liste des artéfacts construits et cliquer sur l'un d'eux pour directement le télécharger. Mais on peut également le télécharger depuis `Build` > `Artifact`.
 
 **Capture dans `Build` > `Artifact`**
 
-![2-4-phase-build-artifact-list.png](../capture/2-4-phase-build-artifact-list.png)
+![2-4-phase-build-artifact-list.png](./capture/2-4-phase-build-artifact-list.png)
 
 **Capture dans `Build` > `Pipeline`**
 
-![2-4-phase-build-artifact-download.png](../capture/2-4-phase-build-artifact-download.png)
+![2-4-phase-build-artifact-download.png](./capture/2-4-phase-build-artifact-download.png)
 
 5. Si on regarder le contenu de l'artéfact, il contient 3 fichiers 
    + **`artifacts.zip` :** qui contient l'image docker .tar
    + **`metadata.gz` :** les metadonnés de l'artéfact: nom de l'image, le droit du système sur le fichier, le crc pour la sécurité du fichier, la taille de l'image
    + **`job.log`:** les logs du pipeline que nous avons vu sur la partie 4.
 
-![2-5-phase-build-artifact-content.png](../capture/2-5-phase-build-artifact-content.png)
+![2-5-phase-build-artifact-content.png](./capture/2-5-phase-build-artifact-content.png)
 
 6. Mais si on clique sur l'icône du dossier de l'artéfact dans `Build` > `Artifact`, on verra le nom de l'artéfact que nous avons spécifié dans `.gitlab-ci.yml`.
 
 **Capture de l'icône du dossier**
 
-![2-6-phase-build-artifact-directory.png](../capture/2-6-phase-build-artifact-directory.png)
+![2-6-phase-build-artifact-directory.png](./capture/2-6-phase-build-artifact-directory.png)
 
 **Capture du nom de l'artefact**
 
-![2-6-phase-build-artifact-name-gitlab-ci.png](../capture/2-6-phase-build-artifact-name-gitlab-ci.png)
+![2-6-phase-build-artifact-name-gitlab-ci.png](./capture/2-6-phase-build-artifact-name-gitlab-ci.png)
 
 Donc maintenant, nous pouvons passer à la phase de test d'acceptation.
 
@@ -140,15 +140,15 @@ Etant donné que nous avons confirmer que l'artéfact est bien présent dans `Bu
 
 **Capture du nouveau pipeline:**
 
-![3-1-1-phase-acceptance-new-job.png](../capture/3-1-1-phase-acceptance-new-job.png)
+![3-1-1-phase-acceptance-new-job.png](./capture/3-1-1-phase-acceptance-new-job.png)
 
 **Capture des détails du pipeline:**
 
-![3-1-2-phase-acceptance-job-name.png](../capture/3-1-2-phase-acceptance-job-name.png)
+![3-1-2-phase-acceptance-job-name.png](./capture/3-1-2-phase-acceptance-job-name.png)
 
 2. Maintenant, on peut faire un clique sur le test d'acceptation pour voir la console du job en question. On peut constater ici que le job s'est bien déroulé puisque nous avons le code de retour `200` et `Succeeded` comme retour.
 
-![3-2-phase-acceptance-console.png](../capture/3-2-phase-acceptance-console.png)
+![3-2-phase-acceptance-console.png](./capture/3-2-phase-acceptance-console.png)
 
 # Release image
 
@@ -159,17 +159,17 @@ Nous avons validé le bon fonctionnement de l'image. Maintenant, nous allons la 
     + la première sera la clé API de mon compte HEROKU sur https://dashboard.heroku.com/account (Mon compte > Account Settings > API Key)
     + et la deuxième le nom de l'image `registry.gitlab.com/skynet17/mini-projet-gitlab/mini_projet_gitlab`, où la première partie est le serveur sur lequel se trouve le registry de gitlab, puis mon espace à mois, ensuite le projet sur lequel je travail et enfin le nom de mon image
 
-![4-1-release-image-variable.png](../capture/4-1-release-image-variable.png)
+![4-1-release-image-variable.png](./capture/4-1-release-image-variable.png)
 
 2. Nous pouvons désormais effectuer un push de notre code après avoir ajouté la section `Release image` dans notre fichier `.gitlab-ci.yml` et le pipeline va se lancer aussitôt. On vera donc dans la liste des pipelines qu'un nouveau pipeline est en cours d'éxecution et cette fois ci, il y aura trois stages. Et comme d'habitude, on peut cliquer sur la référence du pipeline pour voir le détails du pipeline:
 
 **Capture dans liste des pipelines**
 
-![4-2-release-image-pipeline.png](../capture/4-2-release-image-pipeline.png)
+![4-2-release-image-pipeline.png](./capture/4-2-release-image-pipeline.png)
 
 **Capture des détails du pipeline**
 
-![4-3-release-image-job-stage.png](../capture/4-3-release-image-job-stage.png)
+![4-3-release-image-job-stage.png](./capture/4-3-release-image-job-stage.png)
 
 # Deploy review & Stop review
 
@@ -186,66 +186,66 @@ Le release étant effectué durant la précédente étape, nous allons maintenan
 
 Et si on regarde notre repo distant (sur Gitlab), on verra une nouvelle branche au nom de `review` et `staging` et nous aurions également tous les fichiers qui étaient dans la branche `main`:
 
-![5-1-staging-create-branch.png](../capture/5-1-staging-create-branch.png)
+![5-1-staging-create-branch.png](./capture/5-1-staging-create-branch.png)
 
 1. J'ai ajouté les sections `deploy review & stop review` et fait un push vers le repo distant. Le pipeline s'est lancé automatiquement mais seulement avec encore 3 stages car si on regarde bien les dans notre fichier de pipeline, on verra l'instruction `only: merge_requests`, donc les pipelines de review ne se lanceront que lors d'un merge.
 
 **Capture pipeline list**
 
-![7-1-review-pipeline-list.png](../capture/7-1-review-pipeline-list.png)
+![7-1-review-pipeline-list.png](./capture/7-1-review-pipeline-list.png)
 
 **Capture pipeline details**
 
-![7-1-review-pipeline-details.png](../capture/7-1-review-pipeline-details.png)
+![7-1-review-pipeline-details.png](./capture/7-1-review-pipeline-details.png)
 
 2. Et une fois que le pipeline se termine, il y aura un bandeau en haut qui va suggérer de faire un merge étant donné que le push effectué n'était pas sur la branche principale. 
 
-![7-2-review-bandeau-merge.png](../capture/7-2-review-bandeau-merge.png)
+![7-2-review-bandeau-merge.png](./capture/7-2-review-bandeau-merge.png)
 
 3. Mais on peut aussi créer le merge request depuis la barre latérale gauche puis dans `Code > Merge requests` puis `New merge request`.
 
 **Capture du création merge request interface 1:**
 
-![7-3-1-review-merge-request-form.png](../capture/7-3-1-review-merge-request-form.png)
+![7-3-1-review-merge-request-form.png](./capture/7-3-1-review-merge-request-form.png)
 
 **Capture du création merge request interface 2:**
 
-![7-3-2-review-merge-request-form1.png](../capture/7-3-2-review-merge-request-form1.png)
+![7-3-2-review-merge-request-form1.png](./capture/7-3-2-review-merge-request-form1.png)
 
 4. On est ensuite redirigé vers cette interface pour remplir les différents champs afin de paramétrer le comporetement du merge request. Et si on a préféré cliquer sur le bandeau, on aura été redirigé vers cette interface également. Mais surtout, on ne va pas oublié de décocher l'option ci-dessous afin de ne pas supprimer la branche staging étant donné qu'elle nous servira encore. 
 
 **Capture tête du formulaire:**
 
-![7-4-1-review-merge-request-form2.png](../capture/7-4-1-review-merge-request-form2.png)
+![7-4-1-review-merge-request-form2.png](./capture/7-4-1-review-merge-request-form2.png)
 
 **Capture du pied du formulaire:**
 
-![7-4-2-review-merge-request-form-delete.png](../capture/7-4-2-review-merge-request-form-delete.png)
+![7-4-2-review-merge-request-form-delete.png](./capture/7-4-2-review-merge-request-form-delete.png)
 
 5. Une fois qu'on a cliqué sur `create merge resquest`, on est redirigé vers la page ci-dessous qui va nous indiqué que le merge s'est bien lancé. On peut cliquer sur la référence du merge pour avoir les détails du pipeline.
 
-![7-5-review-merge-request-launched.png](../capture/7-5-review-merge-request-launched.png)
+![7-5-review-merge-request-launched.png](./capture/7-5-review-merge-request-launched.png)
 
 6. Après avoir cliqué sur la référence du pipeline, on est redirigé vers la page qui affiche les détails du pipeline et on verra qu'il n'y a que deux pipeline. Car dans notre fichier `.gitlab-ci.yml`, on a dit que les deux pipelines seront lancés lors d'un merge request:
 
     + `deploy review`: pour faire la création du projet dans un environnement conteneuriser et faire le test de l'application;
     + `stop review`: pour supprimer l'environnement une fois le test terminer car sinon, ça va occuper notre espace sur Heroku pour en. Mais on peut voir les icônes play et stop sur le job stop deploy car dans notre fichier `.gitlab-ci.yml`, nous avons spécifié que ce job sera lancé manuellement, donc cela nous laisse le temps de vérifier et confirmer que l'application est bien accessible avec de valider la suppression de l'environnement de review. Et on peut également arrêter le job si on veut.
 
-![7-6-merge-request-pipeline-details.png](../capture/7-6-merge-request-pipeline-details.png)
+![7-6-merge-request-pipeline-details.png](./capture/7-6-merge-request-pipeline-details.png)
 
 7. Avant de supprimer l'environnement de review si le deploy review s'est terminé sans erreur, on peut aller dans `Operate > Environments`, puis on identifie notre job, et on clique sur open pour accéder à l'application.
 
 **Capture environnement:**
 
-![7-7-merge-request-environment-open.png](../capture/7-7-merge-request-environment-open.png)
+![7-7-merge-request-environment-open.png](./capture/7-7-merge-request-environment-open.png)
 
 **Capture vérification application:**
 
-![7-7-merge-request-url-open.png](../capture/7-7-merge-request-url-open.png)
+![7-7-merge-request-url-open.png](./capture/7-7-merge-request-url-open.png)
 
 8. Comme les pipelines précédents, on peut cliquer sur le job pour accéder à la console d'évènement. Et on verra que le job s'est bien terminé avec succès. 
 
-![8-merge-request-console-stop-review.png](../capture/8-merge-request-console-stop-review.png)
+![8-merge-request-console-stop-review.png](./capture/8-merge-request-console-stop-review.png)
 
 # Deploy staging
 
@@ -255,21 +255,21 @@ Et si on regarde notre repo distant (sur Gitlab), on verra une nouvelle branche 
 
 **Capture depuis pipeline:**
 
-![5-2-staging-create-branch-pipeline.png](../capture/5-2-staging-create-branch-pipeline.png)
+![5-2-staging-create-branch-pipeline.png](./capture/5-2-staging-create-branch-pipeline.png)
 
 **Details du pipeline:**
 
-![5-2-staging-create-branche-pipeline-details.png](../capture/5-2-staging-create-branche-pipeline-details.png)
+![5-2-staging-create-branche-pipeline-details.png](./capture/5-2-staging-create-branche-pipeline-details.png)
 
 3. L'éxecution des pipelines étant terminé, nous allons maintenant pouvoir vérifier le lien de notre application en staging sur Heroku:
 
 **Capture depuis la barre latérale gauche `Operate > Environments > Open`:**
 
-![5-3-staging-open-url-staging.png](../capture/5-3-staging-open-url-staging.png)
+![5-3-staging-open-url-staging.png](./capture/5-3-staging-open-url-staging.png)
 
 **Capture de l'application:**
 
-![5-3-staging-check-url-staging.png](../capture/5-3-staging-check-url-staging.png)
+![5-3-staging-check-url-staging.png](./capture/5-3-staging-check-url-staging.png)
 
 # Test Staging
 
@@ -279,15 +279,15 @@ Nous avons confirmé que l'application est accessible via son URL de staging en 
 
 **Capture du pipeline:**
 
-![6-1-test-stagine-pipeline.png](../capture/6-1-test-stagine-pipeline.png)
+![6-1-test-stagine-pipeline.png](./capture/6-1-test-stagine-pipeline.png)
 
 **Capture du détails du pipeline:**
 
-![6-1-test-stagine-pipeline-details.png](../capture/6-1-test-stagine-pipeline-details.png)
+![6-1-test-stagine-pipeline-details.png](./capture/6-1-test-stagine-pipeline-details.png)
 
 2. Le pipeline s'est terminé avec succès et on peut maintenant confirmé que l'URL a bien été vérifié et l'application est bien fonctionnel
 
-![6-2-test-stagine-console.png](../capture/6-2-test-stagine-console.png)
+![6-2-test-stagine-console.png](./capture/6-2-test-stagine-console.png)
 
 # Deploy Prod et Test Deploy
 
@@ -297,27 +297,27 @@ Nous venons de confirmer via la phase de review et la phase de déploiement en s
 
 **Capture avant clique sur `Merge`:**
 
-![8-1-deploy-prod-merge-request.png](../capture/8-1-deploy-prod-merge-request.png)
+![8-1-deploy-prod-merge-request.png](./capture/8-1-deploy-prod-merge-request.png)
 
 **Capture après clique sur `Merge`:**
 
-![8-1-1-deploy-prod-merge-request.png](../capture/8-1-1-deploy-prod-merge-request.png)
+![8-1-1-deploy-prod-merge-request.png](./capture/8-1-1-deploy-prod-merge-request.png)
 
 2. Comme d'habitude, on clique sur la référence du pipeline pour avoir les détails et on verra qu'après le release, c'est directement le déploiement vers la prod car celui de staging est juste concernant la branche staging.
 
-![8-1-deploy-prod-pipeline-details.png](../capture/8-1-deploy-prod-pipeline-details.png)
+![8-1-deploy-prod-pipeline-details.png](./capture/8-1-deploy-prod-pipeline-details.png)
 
 3. Après quelques minutes de patience (qui est une vertue :) ), on constate que le job de `Test prod` est bien en succès.
 
-![8-3-deploy-prod-console-test-prod.png](../capture/8-3-deploy-prod-console-test-prod.png)
+![8-3-deploy-prod-console-test-prod.png](./capture/8-3-deploy-prod-console-test-prod.png)
 
 4. Pour confirmer que le pipeline s'est bien terminé avec succès et que l'application est bien fonctionnelle sur l'environnement de production, on va le vérifier dans `Operate > Environments`, puis `open`.
 
-![8-4-deploy-prod-open-url.png](../capture/8-4-deploy-prod-open-url.png)
+![8-4-deploy-prod-open-url.png](./capture/8-4-deploy-prod-open-url.png)
 
 5. On sera donc redirigé vers l'URL de l'application qui nous confirmera que tout est bien qui fini bien.
 
-![8-4-deploy-prod-open-app.png](../capture/8-4-deploy-prod-open-app.png)
+![8-4-deploy-prod-open-app.png](./capture/8-4-deploy-prod-open-app.png)
 
 # Conclusion
 
