@@ -18,7 +18,7 @@ Ce mini projet est dans le cadre du bootcamp Devops de Eazytraing
 
 # Contexte du projet
 
-Ce projet vise à implémenter un pipeline CI/CD (Intégration Continue et Déploiement Continu) pour automatiser et optimiser le processus de livraison et de déploiement d'une application. Réduisant ainsi les erreurs manuelles, accélérant les mises à jour, et garantissant une intégration fluide et cohérente à chaque étape.
+Ce projet vise à implémenter un pipeline CI/CD (Intégration Continue et Déploiement Continu) pour automatiser et optimiser le processus de livraison et de déploiement d'une application. Réduisant ainsi les erreurs manuelles, accélérant les mises à jour, et garantissant une intégration fluide et cohérente à chaque étape grâce à Gitlab.
 
 Le pipeline se déclenchera à chaque push de code vers le dépôt GitLab, garantissant que les nouvelles modifications sont automatiquement compilées, testées, intégrées, puis déployées sur les serveurs de Test (Staging) et de Production.
 
